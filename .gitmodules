@@ -1,0 +1,3 @@
+[submodule "src/components/shared"]
+	path = src/components/shared
+	url = https://github.com/300-OVAs-2026/core.git

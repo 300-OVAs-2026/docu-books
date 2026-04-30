@@ -1,0 +1,60 @@
+---
+sidebar:
+  order: 1
+title: Juego de globos
+description: Juego de ordenamiento de frases y palabras por medio de globos interactivos
+---
+
+# Juego de globos
+
+El componente `GameBalloons` es una interactiva actividad de ordenamiento y selección en la que el usuario deberá reventar/pinchar globos de texto para formar y completar una frase. 
+
+## Demostración
+
+A continuación se muestra una imagen explicativa del componente, mostrando cómo el usuario interacciona con los globos:
+
+![Demostración Juego Globos](../../../assets/Books.webp)
+
+## Uso e Implementación
+
+Para usar este juego en cualquier parte del contenido, primero debes importar el componente base y luego declarar internamente sus subcomponentes (`Level` y `Button`).
+
+### 1. Importación
+
+Si necesitas usarlo en tu aplicación principal (o MDX), utiliza el alias correspondiente:
+
+```tsx
+import { GameBalloons } from '@/components/shared/components/games/game-balloons';
+```
+
+### 2. Estructura Básica
+
+El juego requiere recibir como `children` sus propios subcomponentes. En particular, `GameBalloons.Level` necesita la propiedad `word` (un array de *strings*) que contiene las palabras desordenadas, y opcionalmente `sentence` para validar frases exactas.
+
+```tsx
+<GameBalloons client:load>
+  <GameBalloons.Level
+    word={['El', 'perro', 'ladra', 'fuerte']} 
+  />
+  
+  {/* Botones de acción "Comprobar" y "Reintentar" automáticos */}
+  <GameBalloons.Button />
+</GameBalloons>
+```
+
+
+## Props Disponibles
+
+### `GameBalloons`
+
+| Propiedad | Tipo | Descripción | Opcional |
+| :--- | :--- | :--- | :--- |
+| `children` | `JSX.Element \| JSX.Element[]` | Elementos internos como el Nivel y el Botón. | No |
+| `onResult` | `(res: {result: boolean, options: []}) => void` | Evento emitido al terminar el nivel validado. | Sí |
+
+### `GameBalloons.Level`
+
+| Propiedad | Tipo | Descripción | Opcional |
+| :--- | :--- | :--- | :--- |
+| `word` | `string[]` | Array con las palabras esperadas. | No |
+| `sentence` | `string` | Frase completa exacta, de no pasarse se autocompleta con `word`. | Sí |
