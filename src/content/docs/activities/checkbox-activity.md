@@ -1,6 +1,4 @@
 ---
-sidebar:
-  order: 1
 title: Actividades con selección múltiple
 description: Componente Checkboxs para crear actividades con casillas de selección múltiple.
 ---
@@ -107,7 +105,7 @@ Utiliza el componente `<Checkboxs>` envolviendo las opciones correspondientes y 
 </Checkboxs>
 ```
 
-> `state="success"` declara qué opciones **deben** ser marcadas para que la respuesta sea validada como correcta. `state="wrong"` marca las opciones que no deberían elegirse. 
+> `state="success"` declara qué opciones **deben** ser marcadas para que la respuesta sea validada como correcta. `state="wrong"` marca las opciones que no deberían elegirse.
 
 ---
 
