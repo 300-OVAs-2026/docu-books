@@ -1,6 +1,38 @@
 ---
-title: Bienvenid@s a la documentación oficial de Books&Books equipo frontend
-description: Acá estará toda la información necesaria para aprender a maquetar.
-
+title: Bienvenid@s a la documentación de Books&Books
+description: Todo lo que necesita el equipo frontend para maquetar con consistencia, velocidad y buen criterio.
+template: splash
+hero:
+  tagline: La fuente de verdad del equipo frontend de Books&Books. Componentes, actividades, hooks y utilidades para maquetar sin adivinar.
+  actions:
+    - text: Empezar a leer
+      link: /guides
+      icon: right-arrow
+      variant: primary
+    - text: Ver actividades
+      link: /actividades
+      icon: rocket
 ---
 
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Actividades" icon="rocket">
+    Selección múltiple, crucigramas, campos de entrada, drag & drop, relacionar conceptos, selectores, comparación y más.
+  </Card>
+  <Card title="Juegos" icon="star">
+    Botellas, casino educativo, peces, economía, asociación de frases e imágenes, preguntas, canasta, espacial y globos.
+  </Card>
+  <Card title="Componentes UI" icon="puzzle">
+    Botones, modales, alertas, iconos, visor de cómics, fórmulas matemáticas, tarjetas de memoria, tabla verdadero/falso y más.
+  </Card>
+  <Card title="Hooks" icon="setting">
+    Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas, atajos de teclado, sesión y título de página.
+  </Card>
+  <Card title="Utilidades" icon="seti:config">
+    Eventos de video, actualización de títulos, control de foco, gestión de atajos de teclado y carga dinámica de CSS.
+  </Card>
+  <Card title="Constantes" icon="open-book">
+    Definición de eventos del sistema, teclas de accesibilidad y expresiones regulares para limpieza de HTML.
+  </Card>
+</CardGrid>

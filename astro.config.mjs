@@ -27,12 +27,12 @@ export default defineConfig({
       customCss: ['./src/styles/starlight-theme.css'],
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/300-OVAs-2026/core' }],
       sidebar: [
-         {
-    label: 'Guías',
-    autogenerate: { directory: 'guides' },
-    collapsed: true, // El acordeón empezará cerrado
-    badge: { text: '¡Nuevo!', variant: 'tip' }
-  },
+        {
+          label: 'Guías',
+          autogenerate: { directory: 'guides' },
+          collapsed: true, // El acordeón empezará cerrado
+          badge: { text: '¡Nuevo!', variant: 'tip' }
+        },
         { label: 'Actividades', autogenerate: { directory: 'activities' } },
         { label: 'Juegos', autogenerate: { directory: 'games' } },
         { label: 'Componentes UI', autogenerate: { directory: 'ui' } },

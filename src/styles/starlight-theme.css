@@ -1,6 +1,88 @@
 @import "tailwindcss";
 
-/* :root {
-  --sl-color-accent-high: #4d003f;
-  --sl-color-accent: #7d0096;
-} */
+/* ── Expressive Code — bloques de código ─────────────────────────────────────
+   Starlight usa Expressive Code internamente. Estas variables sobreescriben
+   los colores del bloque completo: fondo, barra de título, bordes y botones.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Colores de acento de Starlight (opcional, para consistencia) */
+  /* --sl-color-accent-high: #4d003f; */
+  /* --sl-color-accent: #7d0096;      */
+}
+
+/* Fondo y borde del bloque */
+.expressive-code .frame {
+  --ec-frm-frameBoxShdCssVal: none;
+  border-radius: 0.875rem;
+  overflow: hidden;
+}
+
+/* ── Tema claro ───────────────────────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  /* Barra de título (donde aparece el nombre del archivo o el lenguaje) */
+  --ec-frm-edTabBarBg: #f0e9ff;
+  --ec-frm-edTabBarBrdBtmCol: #d8c8f5;
+  --ec-frm-edActTabBg: #e4d4ff;
+  --ec-frm-edActTabIndTopCol: #7c3aed;
+  --ec-frm-edActTabBrdCol: #c4b0f0;
+  --ec-frm-edTabCol: #6d28d9;
+
+  /* Cuerpo del bloque de código */
+  --ec-frm-codeBackground: #faf8ff;
+  --ec-frm-codePadBlk: 1.25rem;
+  --ec-frm-codePadInl: 1.5rem;
+
+  /* Borde exterior */
+  --ec-brdCol: #ddd4fe;
+  --ec-brdRad: 0.875rem;
+
+  /* Botón de copiar */
+  --ec-frm-inlBtnBg: #ede9fe;
+  --ec-frm-inlBtnBgHov: #ddd6fe;
+  --ec-frm-inlBtnFg: #7c3aed;
+  --ec-frm-inlBtnBrdCol: #c4b5fd;
+
+  /* Números de línea */
+  --ec-gtrBrdCol: #e9e3ff;
+  --ec-gtrBg: #f5f0ff;
+  --ec-gtrFg: #a78bfa;
+}
+
+/* ── Tema oscuro ──────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --ec-frm-edTabBarBg: #1e1433;
+  --ec-frm-edTabBarBrdBtmCol: #3b2a6e;
+  --ec-frm-edActTabBg: #2d1f52;
+  --ec-frm-edActTabIndTopCol: #a78bfa;
+  --ec-frm-edActTabBrdCol: #4c3a80;
+  --ec-frm-edTabCol: #c4b5fd;
+
+  --ec-frm-codeBackground: #160e2a;
+
+  --ec-brdCol: #2e2050;
+  --ec-brdRad: 0.875rem;
+
+  --ec-frm-inlBtnBg: #2a1d4a;
+  --ec-frm-inlBtnBgHov: #3b2a6e;
+  --ec-frm-inlBtnFg: #c4b5fd;
+  --ec-frm-inlBtnBrdCol: #4c3a80;
+
+  --ec-gtrBrdCol: #2a1d4a;
+  --ec-gtrBg: #130c23;
+  --ec-gtrFg: #6d4fc4;
+}
+
+/* ── Highlight de líneas ──────────────────────────────────────────────────── */
+/* Cuando marcas líneas con // [!code highlight] o similares */
+:root,
+[data-theme="light"] {
+  --ec-mrkBg: #ede9fe80;
+  --ec-mrkBrdCol: #7c3aed;
+}
+
+[data-theme="dark"] {
+  --ec-mrkBg: #3b2a6e40;
+  --ec-mrkBrdCol: #a78bfa;
+}
