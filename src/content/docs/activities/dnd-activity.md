@@ -10,7 +10,183 @@ import { Button, Row } from '@components/ui';
 
 ## Vista previa
 
-![Ejemplo de actividad DndActivity mostrando el banco de palabras con seis ítems arrastrables en una cuadrícula, el párrafo con seis zonas de destino vacías, y los botones Comprobar y Reintentar al final.](../../../assets//dndActivity.webp)
+![Ejemplo de actividad DndActivity](../../../assets/dndActivity.webp)
+
+## Cómo implementar en un OVA
+
+### 1. Importa los componentes
+
+En tu archivo `.tsx` del OVA importa todo lo necesario:
+
+```tsx
+import { useRef, useState } from 'react';
+import { DragAndDrop, Row } from 'books-ui';
+import { DndActivity } from '@activities/dnd-activity';
+import { useGamification } from '@features/gamification';
+import { ToastFeedback } from '@features/toast-feedback';
+import { Content } from '@layouts';
+import { Button } from '@ui';
+import { currentParagraph } from '@shared/utils/current-paragraph';
+```
+
+---
+
+### 2. Define las constantes
+
+Declara los identificadores de los modales y la cantidad total de respuestas correctas:
+
+```tsx
+const MODALS = {
+  SUCCESS: 'modal-correct-activity',
+  WRONG: 'modal-wrong-activity'
+};
+
+const LENGTH_QUESTION = 6; // total de espacios en blanco
+```
+
+---
+
+### 3. Configura los hooks
+
+Dentro del componente inicializa el ref del párrafo y el hook de gamificación:
+
+```tsx
+const refTextWrapperUno = useRef<HTMLDivElement>(null);
+const [isOpen, setIsOpen] = useState<string | null>(null);
+
+const { Modal, Stars, notifyReset, reportResult } = useGamification({
+  id: 'ova-08-activity-1', // ID único por OVA
+  total: 1
+});
+```
+
+---
+
+### 4. Crea el handler de validación
+
+Esta función recibe el resultado de `DndActivity` y abre el modal correspondiente:
+
+```tsx
+const handleValidate = ({ result }: { result: boolean }) => {
+  const activityResult = result ? 'SUCCESS' : 'WRONG';
+  setIsOpen(MODALS[activityResult as keyof typeof MODALS]);
+
+  reportResult({
+    success: result,
+    correct: LENGTH_QUESTION,
+    total: LENGTH_QUESTION
+  });
+};
+
+const closeModal = () => setIsOpen(null);
+```
+
+---
+
+### 5. Construye la actividad
+
+Dentro del `return`, arma el `DndActivity` con sus tres partes:
+
+**5a. Banco de palabras** — todos los ítems arrastrables dentro de `DragAndDrop.Container`:
+
+```tsx
+<DragAndDrop.Container id="general-1" label="Conjunto de palabras" addClass="u-grid u-grid-cols-3">
+  <DragAndDrop.Drag id="01" label="producción alimentaria">
+    <span>producción alimentaria</span>
+  </DragAndDrop.Drag>
+  <DragAndDrop.Drag id="02" label="degradación del suelo">
+    <span>degradación del suelo</span>
+  </DragAndDrop.Drag>
+  {/* ...más ítems */}
+</DragAndDrop.Container>
+```
+
+> El `id` de cada `Drag` es clave — es el valor que usa `validate` en los `Drop`.
+
+**5b. Párrafo con zonas** — el texto con los `DragAndDrop.Drop` intercalados:
+
+```tsx
+<span ref={refTextWrapperUno} className="u-text-justify u-leading-loose u-block u-m-3">
+  El texto introductorio incluyen la
+  <DragAndDrop.Drop id="drop1-1" validate={['05']} label="primer espacio" addClass="u-mx-1" />
+  que reduce
+  <DragAndDrop.Drop id="drop1-2" validate={['06']} label="segundo espacio" addClass="u-mx-1" />
+  y aumenta la demanda...
+</span>
+```
+
+> `validate={['05']}` significa que el Drop acepta como correcta la palabra con `id="05"`.
+
+**5c. Botones de acción:**
+
+```tsx
+<Row justifyContent="center" alignItems="center" addClass="u-gap-x-6">
+  <DndActivity.Button>
+    <Button label="Comprobar" variant="check" />
+  </DndActivity.Button>
+  <DndActivity.Button type="reset">
+    <Button label="Reintentar" variant="reset" onClick={notifyReset} />
+  </DndActivity.Button>
+</Row>
+```
+
+---
+
+### 6. Conecta todo en DndActivity
+
+Envuelve las tres partes con el componente raíz:
+
+```tsx
+<DndActivity
+  id="ova-08-dnd-1"
+  minCorrectDrags={6}
+  announcements={() =>
+    currentParagraph({ id: 'paragraph-activity', container: refTextWrapperUno?.current })
+  }
+  onResult={handleValidate}>
+
+  {/* 5a. Banco */}
+  {/* 5b. Párrafo */}
+  {/* 5c. Botones */}
+
+</DndActivity>
+```
+
+---
+
+### 7. Agrega los modales de feedback
+
+Fuera del `Content`, agrega el `Modal` de gamificación y los dos `ToastFeedback`:
+
+```tsx
+{/* Modal de éxito (gamificación) */}
+<Modal audio="assets/audios/content/aud_gr1_ova-8_sld-4 (Bien).mp3" />
+
+{/* Toast incorrecto */}
+<ToastFeedback
+  type="wrong"
+  isOpen={isOpen === MODALS.WRONG}
+  onClose={closeModal}
+  interpreter={{ contentURL: 'vid_int_ova-08_sld-4 (Incorrecto).mp4' }}
+  audio="assets/audios/content/aud_gr1_ova-8_sld-4 (Incorrecto).mp3">
+  <div className="u-flow">
+    <p><strong>Palabra 1:</strong> Explicación de por qué va ahí.</p>
+    {/* ...explicación de cada respuesta */}
+  </div>
+</ToastFeedback>
+
+{/* Toast correcto */}
+<ToastFeedback
+  type="success"
+  isOpen={isOpen === MODALS.SUCCESS}
+  onClose={closeModal}
+  interpreter={{ contentURL: 'vid_int_ova-08_sld-4 (Correcto).mp4' }}
+  audio="assets/audios/content/aud_gr1_ova-8_sld-4 (Correcto).mp3">
+  <p>Has realizado un muy buen trabajo.</p>
+</ToastFeedback>
+```
+
+---
 
 ## Props de DndActivity
 
@@ -50,55 +226,6 @@ import { Button, Row } from '@components/ui';
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como "Comprobar". Con `"reset"` reinicia el estado completo |
-
-## Ejemplo de uso
-
-```tsx
-<DndActivity
-  id="ova-08-dnd-1"
-  minCorrectDrags={6}
-  announcements={() =>
-    currentParagraph({ id: 'paragraph-activity', container: refTextWrapperUno?.current })
-  }
-  onResult={handleValidate}>
-
-  {/* Banco de palabras */}
-  <DragAndDrop.Container id="general-1" label="Conjunto de palabras" addClass="u-grid u-grid-cols-3">
-    <DragAndDrop.Drag id="01" label="producción alimentaria">
-      <span>producción alimentaria</span>
-    </DragAndDrop.Drag>
-    <DragAndDrop.Drag id="02" label="degradación del suelo">
-      <span>degradación del suelo</span>
-    </DragAndDrop.Drag>
-    <DragAndDrop.Drag id="05" label="urbanización acelerada">
-      <span>urbanización acelerada</span>
-    </DragAndDrop.Drag>
-    <DragAndDrop.Drag id="06" label="las tierras agrícolas">
-      <span>las tierras agrícolas</span>
-    </DragAndDrop.Drag>
-  </DragAndDrop.Container>
-
-  {/* Párrafo con zonas de destino */}
-  <span ref={refTextWrapperUno} className="u-text-justify u-leading-loose u-block u-m-3">
-    Los retos y desafíos de la producción sostenible de alimentos incluyen la
-    <DragAndDrop.Drop id="drop1-1" validate={['05']} label="primer espacio" addClass="u-mx-1" />
-    que reduce
-    <DragAndDrop.Drop id="drop1-2" validate={['06']} label="segundo espacio" addClass="u-mx-1" />
-    y aumenta la demanda de alimentos...
-  </span>
-
-  {/* Botones de acción */}
-  <Row justifyContent="center" alignItems="center" addClass="u-gap-x-6">
-    <DndActivity.Button>
-      <Button label="Comprobar" variant="check" />
-    </DndActivity.Button>
-    <DndActivity.Button type="reset">
-      <Button label="Reintentar" variant="reset" onClick={notifyReset} />
-    </DndActivity.Button>
-  </Row>
-
-</DndActivity>
-```
 
 ## Flujo de validación
 

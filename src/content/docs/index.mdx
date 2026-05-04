@@ -1,38 +1,74 @@
 ---
 title: Bienvenid@s a la documentación de Books&Books
 description: Todo lo que necesita el equipo frontend para maquetar con consistencia, velocidad y buen criterio.
-template: splash
+tableOfContents: false
 hero:
   tagline: La fuente de verdad del equipo frontend de Books&Books. Componentes, actividades, hooks y utilidades para maquetar sin adivinar.
   actions:
     - text: Empezar a leer
-      link: /guides
+      link: /guides/uso/
       icon: right-arrow
       variant: primary
     - text: Ver actividades
-      link: /actividades
+      link: /activities/checkbox-activity/
       icon: rocket
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
+import { CardGrid, Card } from "@astrojs/starlight/components";
 
 <CardGrid stagger>
   <Card title="Actividades" icon="rocket">
-    Selección múltiple, crucigramas, campos de entrada, drag & drop, relacionar conceptos, selectores, comparación y más.
+    Selección múltiple, crucigramas, campos de entrada, drag and drop,
+    relacionar conceptos, selectores, comparación y más.
   </Card>
   <Card title="Juegos" icon="star">
-    Botellas, casino educativo, peces, economía, asociación de frases e imágenes, preguntas, canasta, espacial y globos.
+    Botellas, casino educativo, peces, economía, asociación de frases e
+    imágenes, preguntas, canasta, espacial y globos.
   </Card>
   <Card title="Componentes UI" icon="puzzle">
-    Botones, modales, alertas, iconos, visor de cómics, fórmulas matemáticas, tarjetas de memoria, tabla verdadero/falso y más.
+    Botones, modales, alertas, iconos, visor de cómics, fórmulas matemáticas,
+    tarjetas de memoria, tabla verdadero/falso y más.
   </Card>
   <Card title="Hooks" icon="setting">
-    Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas, atajos de teclado, sesión y título de página.
+    Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas,
+    atajos de teclado, sesión y título de página.
   </Card>
   <Card title="Utilidades" icon="seti:config">
-    Eventos de video, actualización de títulos, control de foco, gestión de atajos de teclado y carga dinámica de CSS.
+    Eventos de video, actualización de títulos, control de foco, gestión de
+    atajos de teclado y carga dinámica de CSS.
   </Card>
   <Card title="Constantes" icon="open-book">
-    Definición de eventos del sistema, teclas de accesibilidad y expresiones regulares para limpieza de HTML.
+    Definición de eventos del sistema, teclas de accesibilidad y expresiones
+    regulares para limpieza de HTML.
   </Card>
 </CardGrid>
+
+<style>{`
+
+  .hero{
+    grid-template-columns: 1fr;
+  }
+
+  /* Cards con fondo degradado */
+  .card {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--sl-color-accent, #7d0096) 18%, var(--sl-color-bg-nav)) 0%,
+      var(--sl-color-bg-nav) 100%
+    ) !important;
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent, #7d0096) 30%, transparent) !important;
+    border-radius: 0.75rem !important;
+    transition: border-color 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .card:hover {
+    border-color: color-mix(in srgb, var(--sl-color-accent, #7d0096) 60%, transparent) !important;
+  }
+
+  .card .icon {
+    background-color: color-mix(in srgb, var(--sl-color-accent, #7d0096) 20%, transparent) !important;
+    border-radius: 0.5rem !important;
+    padding: 0.35rem !important;
+    color: var(--sl-color-accent-high, #c084fc) !important;
+  }
+`}</style>
