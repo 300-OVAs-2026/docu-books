@@ -3,9 +3,6 @@ title: Actividades de arrastrar y soltar
 description: Componente DndActivity para crear ejercicios interactivos de arrastrar palabras a zonas de texto.
 ---
 
-import { DndActivity, DragAndDrop } from '@components/activities';
-import { Button, Row } from '@components/ui';
-
 `DndActivity` es el componente raíz que orquesta la actividad completa. Gestiona el estado global de arrastre, validación y resultados. Se compone de tres subcomponentes: `DragAndDrop.Container`, `DragAndDrop.Drag` y `DragAndDrop.Drop`.
 
 ## Vista previa
