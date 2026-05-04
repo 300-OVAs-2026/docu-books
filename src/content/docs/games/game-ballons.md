@@ -1,13 +1,9 @@
 ---
-sidebar:
-  order: 1
 title: Juego de globos
 description: Juego de ordenamiento de frases y palabras por medio de globos interactivos
 ---
 
-# Juego de globos
-
-El componente `GameBalloons` es una interactiva actividad de ordenamiento y selección en la que el usuario deberá reventar/pinchar globos de texto para formar y completar una frase. 
+El componente `GameBalloons` es una interactiva actividad de ordenamiento y selección en la que el usuario deberá reventar/pinchar globos de texto para formar y completar una frase.
 
 ## Demostración
 
@@ -41,7 +37,6 @@ El juego requiere recibir como `children` sus propios subcomponentes. En particu
   <GameBalloons.Button />
 </GameBalloons>
 ```
-
 
 ## Props Disponibles
 
