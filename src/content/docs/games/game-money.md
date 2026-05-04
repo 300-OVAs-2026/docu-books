@@ -1,10 +1,264 @@
 ---
-sidebar:
-  order: 5
 title: Juego de dinero/economía
-description: Juego de dinero/economía
+description: Componente GameMoney para crear actividades interactivas de selección múltiple con temática de economía y dinero.
 ---
 
-# Juego de dinero/economía
+`GameMoney` es el componente raíz para crear preguntas de selección múltiple con temática económica. El estudiante elige la respuesta correcta entre varias opciones. Gestiona el estado de selección, validación y resultado con un retardo configurable antes de mostrar el resultado. Se compone de tres subcomponentes: `GameMoney.Level`, `GameMoney.Radio` y `GameMoney.Button`.
 
-Detalles sobre `game-money`.
+## Vista previa
+
+![Ejemplo de actividad GameMoney mostrando una pregunta de selección múltiple con temática de economía y dinero.](../../../assets/game-money.webp)
+
+## Cómo implementar en un OVA
+
+### 1. Importa los componentes
+
+```tsx
+import { useState } from 'react';
+import { GameMoney } from '@games/game-money';
+import { useGamification } from '@features/gamification';
+import { ToastFeedback } from '@features/toast-feedback';
+import { Button } from '@ui';
+```
+
+---
+
+### 2. Define las constantes
+
+```tsx
+const MODALS = {
+  SUCCESS: 'modal-correct-activity',
+  WRONG: 'modal-wrong-activity'
+};
+
+const LENGTH_QUESTION = 1; // total de preguntas
+```
+
+---
+
+### 3. Configura los hooks
+
+```tsx
+const [isOpen, setIsOpen] = useState<string | null>(null);
+
+const { Modal, Stars, notifyReset, reportResult } = useGamification({
+  id: 'ova-01-activity-1', // debe ser único por actividad
+  total: LENGTH_QUESTION
+});
+```
+
+:::tip[El `id` de gamificación debe ser único por actividad]
+Usa el patrón `ova-[número]-activity-[número]` para mantener consistencia y evitar conflictos en el sistema de puntuación.
+:::
+
+---
+
+### 4. Crea el handler de validación
+
+```tsx
+const handleValidate = ({ result }: { result: boolean }) => {
+  const activityResult = result ? 'SUCCESS' : 'WRONG';
+  setIsOpen(MODALS[activityResult as keyof typeof MODALS]);
+
+  reportResult({
+    success: result,
+    correct: LENGTH_QUESTION,
+    total: LENGTH_QUESTION
+  });
+};
+
+const closeModal = () => setIsOpen(null);
+```
+
+---
+
+### 5. Construye la actividad
+
+La actividad se arma en tres partes dentro de `<GameMoney>`.
+
+**5a. El nivel con su pregunta** — `GameMoney.Level` recibe el texto de la pregunta en `label` y envuelve las opciones:
+
+```tsx
+<GameMoney.Level label="1. ¿Cuál de las siguientes afirmaciones describe mejor la gestión de las relaciones internacionales?">
+  {/* opciones van aquí */}
+</GameMoney.Level>
+```
+
+**5b. Las opciones** — cada `GameMoney.Radio` es una opción seleccionable. Van dentro del `Level`:
+
+```tsx
+<GameMoney.Level label="1. ¿Cuál describe mejor la gestión de las relaciones internacionales?">
+  <GameMoney.Radio
+    id="option-1-1"
+    name="option-1"
+    state="wrong"
+    label="a. Es un conjunto de acciones que facilitan la interacción entre estados y organizaciones."
+  />
+  <GameMoney.Radio
+    id="option-1-2"
+    name="option-1"
+    state="success"
+    label="b. Se refiere únicamente a las políticas económicas de un país."
+  />
+  <GameMoney.Radio
+    id="option-1-3"
+    name="option-1"
+    state="wrong"
+    label="c. Es un proceso exclusivo de organizaciones no gubernamentales."
+  />
+</GameMoney.Level>
+```
+
+> `state="success"` marca la opción correcta. `state="wrong"` las incorrectas. El `name` debe ser igual en todas las opciones del mismo nivel — así solo se puede elegir una. El `id` debe ser único en toda la página.
+
+**5c. Los botones de acción** — van fuera del `Level` pero dentro de `<GameMoney>`:
+
+```tsx
+<Row justifyContent="center" alignItems="center" addClass="u-gap-4">
+  <GameMoney.Button>
+    <Button label="COMPROBAR" variant="check" />
+  </GameMoney.Button>
+  <GameMoney.Button type="reset">
+    <Button label="REINICIAR" onClick={notifyReset} variant="reset" />
+  </GameMoney.Button>
+</Row>
+```
+
+**5d. Todo junto:**
+
+```tsx
+<GameMoney onResult={handleValidate}>
+
+  {/* 5a y 5b — nivel con sus opciones */}
+  <GameMoney.Level label="1. ¿Cuál describe mejor la gestión de las relaciones internacionales?">
+    <GameMoney.Radio id="option-1-1" name="option-1" state="wrong"   label="a. Es un conjunto de acciones que facilitan la interacción entre estados." />
+    <GameMoney.Radio id="option-1-2" name="option-1" state="success" label="b. Se refiere únicamente a las políticas económicas de un país." />
+    <GameMoney.Radio id="option-1-3" name="option-1" state="wrong"   label="c. Es un proceso exclusivo de organizaciones no gubernamentales." />
+  </GameMoney.Level>
+
+  {/* 5c — botones */}
+  <Row justifyContent="center" alignItems="center" addClass="u-gap-4">
+    <GameMoney.Button>
+      <Button label="COMPROBAR" variant="check" />
+    </GameMoney.Button>
+    <GameMoney.Button type="reset">
+      <Button label="REINICIAR" onClick={notifyReset} variant="reset" />
+    </GameMoney.Button>
+  </Row>
+
+</GameMoney>
+```
+
+:::note
+Si hay múltiples preguntas, agrega más bloques `GameMoney.Level` dentro del mismo `<GameMoney>`. El `name` de cada nivel debe ser diferente para que las opciones no interfieran entre sí.
+
+```tsx
+<GameMoney onResult={handleValidate}>
+  <GameMoney.Level label="Pregunta 1...">
+    <GameMoney.Radio id="option-1-1" name="option-1" state="wrong"   label="a. ..." />
+    <GameMoney.Radio id="option-1-2" name="option-1" state="success" label="b. ..." />
+  </GameMoney.Level>
+
+  <GameMoney.Level label="Pregunta 2...">
+    <GameMoney.Radio id="option-2-1" name="option-2" state="success" label="a. ..." />
+    <GameMoney.Radio id="option-2-2" name="option-2" state="wrong"   label="b. ..." />
+  </GameMoney.Level>
+
+  <Row justifyContent="center" alignItems="center" addClass="u-gap-4">
+    <GameMoney.Button>
+      <Button label="COMPROBAR" variant="check" />
+    </GameMoney.Button>
+    <GameMoney.Button type="reset">
+      <Button label="REINICIAR" onClick={notifyReset} variant="reset" />
+    </GameMoney.Button>
+  </Row>
+</GameMoney>
+```
+:::
+
+---
+
+### 6. Agrega los modales de feedback
+
+```tsx
+<Modal
+  audio="assets/audios/content/aud_gr1_ova-01_sld-1 (Bien).mp3"
+  interpreter={{ contentURL: 'content/vid_int_ova-01_sld-1 (Bien).mp4' }}
+/>
+
+<ToastFeedback
+  type="wrong"
+  isOpen={isOpen === MODALS.WRONG}
+  onClose={closeModal}
+  interpreter={{ contentURL: 'content/vid_int_ova-01_sld-1 (Incorrecto).mp4' }}
+  audio="assets/audios/content/aud_gr1_ova-01_sld-1 (Incorrecto).mp3">
+  <p>Revisa el contenido e intenta de nuevo.</p>
+</ToastFeedback>
+
+<ToastFeedback
+  type="success"
+  isOpen={isOpen === MODALS.SUCCESS}
+  onClose={closeModal}
+  interpreter={{ contentURL: 'content/vid_int_ova-01_sld-1 (Correcto).mp4' }}
+  audio="assets/audios/content/aud_gr1_ova-01_sld-1 (Correcto).mp3">
+  <p>¡Muy bien! Has respondido correctamente.</p>
+</ToastFeedback>
+```
+
+---
+
+## Subcomponentes
+
+### `GameMoney`
+
+Contenedor raíz. Gestiona el estado global de selección y validación con retardo configurable.
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `onResult` | `({ result, options }) => void` | | Callback al comprobar. Recibe `result` (boolean) y el array de opciones seleccionadas |
+| `minSelected` | `number` | | Mínimo de opciones seleccionadas para habilitar Comprobar. Por defecto `1` |
+| `resultDelayMs` | `number` | | Retardo en milisegundos antes de ejecutar `onResult` tras comprobar. Por defecto `900` |
+
+:::tip[Usa `resultDelayMs` para sincronizar con animaciones]
+El retardo de 900ms por defecto está pensado para que la animación del resultado termine antes de abrir el modal. Si la animación de tu variante es más larga o más corta, ajusta este valor.
+
+```tsx
+<GameMoney onResult={handleValidate} resultDelayMs={1200}>
+```
+:::
+
+---
+
+### `GameMoney.Level`
+
+Contenedor de la pregunta y sus opciones. Accede al contexto interno para mostrar el estado de validación y resultado.
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `label` | `string` | ✓ | Texto de la pregunta |
+| `addClass` | `string` | | Clases utilitarias adicionales para el contenedor del nivel |
+
+---
+
+### `GameMoney.Radio`
+
+Cada opción de respuesta dentro de un nivel.
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `id` | `string` | ✓ | Identificador único en toda la página |
+| `name` | `string` | ✓ | Agrupa las opciones del mismo nivel. Igual en todos los radios del mismo `Level` |
+| `label` | `string` | ✓ | Texto visible de la opción |
+| `state` | `"success" \| "wrong"` | ✓ | Define si la opción es correcta o incorrecta |
+
+> Debe haber exactamente un `state="success"` por nivel.
+
+---
+
+### `GameMoney.Button`
+
+Botón de acción. Siempre debe ir dentro de `<GameMoney>`, fuera del `Level`.
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |

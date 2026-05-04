@@ -49,17 +49,6 @@ const { Modal, Stars, notifyReset, reportResult } = useGamification({
 
 :::tip[El `id` de gamificación debe ser único por actividad]
 Cada actividad del proyecto debe tener un `id` diferente. Usa el patrón `ova-[número]-activity-[número]` para mantener consistencia.
- 
-```tsx
-// ✅ Correcto — cada actividad tiene su propio id
-useGamification({ id: 'ova-01-activity-1', total: 1 }) // primera actividad del OVA 01
-useGamification({ id: 'ova-01-activity-2', total: 1 }) // segunda actividad del OVA 01
-useGamification({ id: 'ova-02-activity-1', total: 1 }) // primera actividad del OVA 02
- 
-// ❌ Incorrecto — id duplicado rompe el sistema de puntuación
-useGamification({ id: 'ova-01-activity-1', total: 1 })
-useGamification({ id: 'ova-01-activity-1', total: 1 })
-```
 :::
 
 ---
