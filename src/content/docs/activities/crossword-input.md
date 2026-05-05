@@ -7,7 +7,7 @@ description: Componentes CrosswordActivity y CrosswordInput para crear crucigram
 
 ## Vista previa
 
-![Ejemplo de actividad de crucigrama interactivo](../../../assets/Books.webp) *(Asegúrate de agregar la imagen en esta ruta si es correspondiente)*
+![Ejemplo de actividad de crucigrama interactivo](../../../assets/Books.webp)
 
 ## Cómo implementar en un OVA
 
@@ -63,6 +63,10 @@ const { Modal, notifyReset, reportResult } = useGamification({
   total: LENGTH_QUESTION
 });
 ```
+
+:::tip[El `id` de gamificación debe ser único por actividad]
+Cada actividad del proyecto debe tener un `id` diferente. Usa el patrón `ova-[número]-activity-[número]` para mantener consistencia.
+:::
 
 ---
 

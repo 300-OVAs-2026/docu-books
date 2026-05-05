@@ -6,8 +6,8 @@ description: Componente SelectGroup para crear actividades interactivas de múlt
 `SelectGroup` es el componente diseñado para manejar grupos anidados de listas desplegables u opciones conjuntas. Permite estructurar la información en modo agrupación (por filas, cards, contextos varios), evaluando su estado de manera combinada bajo un mismo bloque e integrándose naturalmente con las políticas de validación interactiva de todo el OVA. Se basa en proporcionar un contexto global centralizado para orquestar la sincronización entre subcomponentes hijos (`SelectGroup.Select` y `SelectGroup.Button`).
 
 ## Vista previa
- 
-![Ejemplo de actividad usando select por grupos](../../../assets/Books.webp) *(Asegúrate de agregar la imagen en esta ruta si es correspondiente)*
+
+![Ejemplo de actividad de selección por grupos](../../../assets/Books.webp)
 
 ## Cómo implementar en un OVA
 
@@ -62,6 +62,10 @@ const { Modal, notifyReset, reportResult } = useGamification({
   total: TOTAL_QUESTIONS
 });
 ```
+
+:::tip[El `id` de gamificación debe ser único por actividad]
+Cada actividad del proyecto debe tener un `id` diferente. Usa el patrón `ova-[número]-activity-[número]` para mantener consistencia.
+:::
 
 ---
 

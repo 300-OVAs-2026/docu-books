@@ -48,6 +48,10 @@ const { Modal, notifyReset, reportResult } = useGamification({
 });
 ```
 
+:::tip[El `id` de gamificación debe ser único por actividad]
+Cada actividad del proyecto debe tener un `id` diferente. Usa el patrón `ova-[número]-activity-[número]` para mantener consistencia.
+:::
+
 ---
 
 ### 4. Crea el handler de validación
