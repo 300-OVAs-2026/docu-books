@@ -7,7 +7,7 @@ description: Componentes CrosswordActivity y CrosswordInput para crear crucigram
 
 ## Vista previa
 
-![Ejemplo de actividad de crucigrama interactivo](../../../assets/Books.webp)
+![Ejemplo de actividad de crucigrama interactivo](../../../assets/crucigramaAct.webp)
 
 ## Cómo implementar en un OVA
 

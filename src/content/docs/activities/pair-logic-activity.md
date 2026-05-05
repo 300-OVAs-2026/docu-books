@@ -7,7 +7,7 @@ description: Actividad interactiva para relacionar conceptos visuales con descri
 
 ## Vista previa
 
-![Ejemplo de actividad de emparejamiento](../../../assets/Books.webp)
+![Ejemplo de actividad de emparejamiento](../../../assets/pairLogic.webp)
 
 ## Cómo implementar en un OVA
 
