@@ -7,7 +7,7 @@ description: Actividad clásica para validar conocimientos mediante afirmaciones
 
 ## Vista previa
 
-![Ejemplo de actividad de verdadero o falso](../../../assets/Books.webp)
+![Ejemplo de actividad de verdadero o falso](../../../assets/activtyTrueFalse.webp)
 
 ## Cómo implementar en un OVA
 

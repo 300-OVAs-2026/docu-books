@@ -7,7 +7,7 @@ description: Actividad de validación múltiple organizada en una estructura tab
 
 ## Vista previa
 
-![Ejemplo de actividad de verdadero o falso](../../../assets/Books.webp)
+![Ejemplo de actividad de verdadero o falso](../../../assets/tableTrueFalse.webp)
 
 ## Cómo implementar en un OVA
 
