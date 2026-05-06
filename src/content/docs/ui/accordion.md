@@ -7,7 +7,7 @@ El componente `Accordion` permite mostrar y ocultar secciones de contenido, opti
 
 ## Vista previa
 
-![Ejemplo de acordeón](../../../assets/Books.webp)
+![Ejemplo de acordeón](../../../assets/accodionUI.webp)
 
 ## Cómo implementar
 
