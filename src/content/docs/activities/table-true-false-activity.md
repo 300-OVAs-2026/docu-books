@@ -49,7 +49,7 @@ const MODALS = {
   WRONG: 'modal-wrong-activity'
 };
 
-const LENGTH_QUESTION = 1;
+const LENGTH_QUESTION = 3; // Cantidad de enunciados
 
 const options = [
   { id: '1', label: 'El sol es una estrella.',           correct: true  },
@@ -67,7 +67,7 @@ const [isOpen, setIsOpen] = useState<string | null>(null);
 
 const { Modal, Stars, notifyReset, reportResult } = useGamification({
   id: 'ova-01-activity-1', // debe ser único por actividad
-  total: LENGTH_QUESTION
+  total: LENGTH_QUESTION 
 });
 ```
 
@@ -86,8 +86,8 @@ const handleValidate = ({ result }: { result: boolean }) => {
 
   reportResult({
     success: result,
-    correct: result ? 1 : 0,
-    total: 1
+    correct: LENGTH_QUESTION,
+    total: LENGTH_QUESTION
   });
 };
 
@@ -196,8 +196,19 @@ Más completa. Cada `Option` va seguido de un `Feedback` con el texto explicativ
 
 > El `id` del `Feedback` debe coincidir exactamente con el `id` del `Option` al que pertenece. Así el componente sabe qué retroalimentación mostrar para cada afirmación.
 
-:::caution[En la variación B no se pasa `onResult` al raíz]
-En la variación B con `Feedback`, el resultado se gestiona internamente a través de cada `Feedback`. No es necesario pasar `onResult` al componente raíz.
+:::caution[En la variación B el `handleValidate` no usa `setIsOpen`]
+En la variación B, `onResult` sí se pasa al raíz igual que en la variación A. La diferencia es que el handler no necesita abrir un modal por resultado individual — cada `Feedback` maneja su propia retroalimentación. El `reportResult` sigue siendo necesario para la gamificación:
+
+```tsx
+// ✅ Correcto para variación B
+const handleValidate = ({ result }: { result: boolean }) => {
+  reportResult({
+    success: result,
+    correct: LENGTH_QUESTION,
+    total: LENGTH_QUESTION
+  });
+};
+```
 :::
 
 ---
@@ -235,7 +246,7 @@ Contenedor raíz. Gestiona el estado de todas las afirmaciones y la validación 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `options` | `{ id: string; label: string; correct: boolean }[]` | ✓ | Array con las afirmaciones. Define el `id`, el texto y si es verdadera o falsa |
-| `onResult` | `({ result: boolean }) => void` | | Callback al comprobar. Solo necesario en la **variación A** (sin `Feedback`) |
+| `onResult` | `({ result: boolean }) => void` | ✓ | Callback al comprobar. En la **variación A** abre el toast de resultado. En la **variación B** solo reporta el resultado a gamificación sin abrir modal |
 
 ---
 
