@@ -1,4 +1,102 @@
 ---
 title: Content
-description: Interfaz usada dentro de las OVAS
+description: Layout base para las páginas de un OVA. Muestra el título, las estrellas de gamificación y envuelve el contenido con una animación de entrada.
 ---
+
+`Content` es el layout base que envuelve el contenido de cada página de un OVA. Se encarga de mostrar el título de la página, las estrellas de gamificación, conectar el intérprete de lengua de señas y aplicar una animación de entrada suave al montar el componente.
+
+## Cómo implementarlo
+
+### Uso básico
+
+```tsx
+import { Content } from '@layouts';
+
+const OvaTemplatep01 = () => {
+  return (
+    <Content>
+      <p>Contenido de la página aquí.</p>
+    </Content>
+  );
+};
+```
+
+---
+
+### Con gamificación e intérprete
+
+El uso más común en los OVAs incluye las estrellas de gamificación y los videos del intérprete:
+
+```tsx
+import { Content } from '@layouts';
+import { useGamification } from '@features/gamification';
+import { Audio } from 'books-ui';
+
+const OvaTemplatep01 = () => {
+  const { Stars } = useGamification({
+    id: 'ova-01-activity-1',
+    total: 1
+  });
+
+  return (
+    <Content
+      stars={Stars}
+      interpreter={{
+        a11yURL: 'vid_int_des_ova-01_sld-1.mp4',
+        contentURL: 'vid_int_ova-01_sld-1.mp4'
+      }}>
+      <Audio a11y src="assets/audios/aud_des_ova-01_sld-1.mp3" />
+      <p>Contenido de la página aquí.</p>
+    </Content>
+  );
+};
+```
+
+---
+
+### Sin título de página
+
+Si la página no debe mostrar el título automático (por ejemplo, cuando el título es parte del diseño personalizado), usa `withOutTitle`:
+
+```tsx
+<Content withOutTitle>
+  <h1>Mi título personalizado</h1>
+  <p>Contenido aquí.</p>
+</Content>
+```
+
+---
+
+## Props
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `children` | `React.ReactNode` | ✓ | Contenido de la página |
+| `interpreter` | `{ a11yURL: string; contentURL: string }` | | URLs de los videos del intérprete de lengua de señas. `a11yURL` es la versión descriptiva y `contentURL` la versión de contenido |
+| `stars` | `React.ReactNode` | | Componente de estrellas de gamificación. Se obtiene del hook `useGamification` |
+| `withOutTitle` | `boolean` | | Si es `true`, oculta el título automático de la página. Por defecto `false` |
+| `addClass` | `string` | | Clases utilitarias adicionales para el contenedor |
+
+## Qué hace internamente
+
+- **Título automático** — renderiza `<PageTitle>` al inicio del contenido, que muestra el título de la página actual. Se puede ocultar con `withOutTitle`
+- **Estrellas** — pasa el nodo de estrellas al `<PageTitle>` para mostrarlo junto al título
+- **Intérprete** — cuando recibe `interpreter`, llama a `updateVideoSources` del hook `useInterpreter` en modo `fixed`, conectando los videos del intérprete de lengua de señas para esa sección
+- **Animación de entrada** — usa `motion.section` de Framer Motion con una animación de deslizamiento vertical suave (`y: 40 → 0`, `opacity: 0 → 1`) al montar el componente
+
+:::tip[Siempre pasa `stars` cuando la página tiene actividad]
+Si la página tiene una actividad con gamificación, pasa el `Stars` del hook `useGamification` para que las estrellas aparezcan en el título:
+
+```tsx
+const { Stars, Modal, notifyReset, reportResult } = useGamification({
+  id: 'ova-01-activity-1',
+  total: 1
+});
+
+<Content stars={Stars} interpreter={{ ... }}>
+```
+:::
+
+:::note[`interpreter` actualiza el intérprete al montar]
+Cada vez que el componente se monta o cambia `interpreter`, llama al hook `useInterpreter` para actualizar los videos del intérprete en modo `fixed`. Esto significa que al navegar entre secciones el intérprete cambia automáticamente al video correspondiente a esa sección.
+:::

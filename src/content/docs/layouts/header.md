@@ -1,4 +1,100 @@
 ---
 title: Header
-description: Interfaz usada dentro de las OVAS
+description: Componente de cabecera del OVA. Incluye el logo, el menú de navegación, el overlay de accesibilidad y el botón de saltar al contenido principal.
 ---
+
+`Header` es el componente de cabecera que aparece en todas las páginas del OVA. Gestiona el estado de apertura/cierre del menú, la ayuda y el panel de accesibilidad, y renderiza el logo de la UNAD adaptado según la ruta actual. Incluye `SkipToMain`, un botón accesible para saltar directamente al contenido principal.
+
+## Cómo implementarlo
+
+`Header` no recibe props — se autogestiona a través del store y el contexto interno:
+
+```tsx
+import { Header } from '@layouts';
+
+const App = () => {
+  return (
+    <>
+      <Header />
+      <main id="main">
+        {/* páginas del OVA */}
+      </main>
+    </>
+  );
+};
+```
+
+:::note[Se configura solo]
+`Header` no necesita props. Lee la ruta actual con `useHashLocation` para cambiar el logo y gestiona su propio estado de paneles abiertos internamente con `HeaderProvider`.
+:::
+
+## Subcomponentes internos
+
+`Header` incluye dos subcomponentes que se renderizan automáticamente — no necesitas importarlos ni usarlos directamente:
+
+### `SkipToMain`
+
+Botón de accesibilidad visible solo al navegar con teclado. Al pulsarlo, mueve el foco al elemento principal de la página (`#main`), permitiendo a los usuarios de teclado y lectores de pantalla saltarse la navegación repetida en cada página.
+
+- Aparece al recibir foco con `Tab`
+- Llama a `focusMainElement` al hacer clic o pulsar `Enter`
+- Previene el comportamiento por defecto de la barra espaciadora para evitar scroll accidental
+- El texto del botón se adapta al idioma del OVA desde el store
+
+### `A11yOverlay`
+
+Panel de opciones de accesibilidad que se abre desde el menú. Se controla a través de `expanded.a11y` — `Header` lo gestiona automáticamente al pulsar el ícono de accesibilidad en el menú.
+
+## Qué hace internamente
+
+- **Logo adaptativo** — muestra `logo-dark.svg` en la portada (`/`) y `logo.svg` en el resto de páginas, detectando la ruta con `useHashLocation`
+- **Estado de paneles** — gestiona con `useState` cuál de los tres paneles está abierto (`menu`, `help`, `a11y`). Solo uno puede estar abierto a la vez — al abrir uno, los demás se cierran automáticamente
+- **`HeaderProvider`** — expone `expanded` y `handleExpanded` a través de contexto para que `Menu` y otros hijos puedan controlar qué panel está abierto sin prop drilling
+
+## Tipos
+
+### `MenuExpanded`
+
+Estado que controla cuál de los tres paneles está abierto. Solo uno puede ser `true` a la vez:
+
+```ts
+type MenuExpanded = {
+  menu: boolean;  // panel del menú principal
+  help: boolean;  // panel de ayuda
+  a11y: boolean;  // panel de accesibilidad
+};
+```
+
+---
+
+### `MenuOptions`
+
+Enum con los valores válidos para llamar a `handleExpanded`. Úsalo cuando necesites controlar el header desde un componente hijo a través del contexto:
+
+```ts
+enum MenuOptions {
+  MENU = 'menu',   // abre/cierra el menú principal
+  HELP = 'help',   // abre/cierra la ayuda
+  A11Y = 'a11y',   // abre/cierra el panel de accesibilidad
+  RESET = 'reset'  // cierra todos los paneles
+}
+```
+
+---
+
+### `HeaderContextType`
+
+Tipo del contexto que expone `HeaderProvider` a los componentes hijos como `Menu`:
+
+```ts
+interface HeaderContextType {
+  expanded: MenuExpanded;
+  handleExpanded: (property: PropertyType) => void;
+}
+```
+
+> `PropertyType` es `keyof MenuExpanded | 'reset'` — acepta `'menu'`, `'help'`, `'a11y'` o `'reset'`.
+
+:::tip[El Header ya está incluido en el layout raíz]
+En la mayoría de los OVAs el `Header` ya está montado en el layout principal del proyecto. No es necesario agregarlo en cada página — solo confirma que esté en el componente raíz de la aplicación.
+:::

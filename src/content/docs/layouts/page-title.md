@@ -1,4 +1,104 @@
 ---
 title: Page Title
-description: Interfaz usada dentro de las OVAS
+description: Componente que muestra el título de la página actual, el indicador de progreso y las estrellas de gamificación.
 ---
+
+`PageTitle` muestra el título de la página actual del OVA junto con el número de página, un indicador de progreso visual, el ícono del tipo de página y las estrellas de gamificación. Se actualiza automáticamente al navegar entre páginas y también puede actualizarse dinámicamente desde cualquier componente mediante un evento del DOM.
+
+## Cómo implementarlo
+
+`PageTitle` ya está integrado dentro de `Content` — se renderiza automáticamente en cada página que use el layout `Content` sin `withOutTitle`. No necesitas importarlo ni usarlo directamente:
+
+```tsx
+// Dentro de Content — ya está así
+export const Content = ({ stars, withOutTitle }) => (
+  <section>
+    {!withOutTitle && <PageTitle stars={stars} />}
+    {children}
+  </section>
+);
+```
+
+Si por alguna razón necesitas usarlo fuera de `Content`:
+
+```tsx
+import { PageTitle } from '@layouts';
+
+<PageTitle stars={Stars} />
+```
+
+## Props
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `stars` | `React.ReactNode` | | Componente de estrellas de gamificación. Se obtiene del hook `useGamification` y se muestra a la derecha del indicador de progreso |
+
+## Qué muestra
+
+El componente tiene dos zonas visuales:
+
+**Zona izquierda — título:**
+```
+3. Título de la página actual
+```
+El número se extrae automáticamente de la URL (`/page-3` → `3`). El título viene del store según la ruta actual.
+
+**Zona derecha — indicador:**
+- Ícono del tipo de página (`kind`) — diferente para páginas de contenido, quiz, etc.
+- Contador de páginas visitadas: `4 / 12`
+- Barra de progreso que crece según el avance del estudiante
+- Estrellas de gamificación (si se pasan)
+
+## Actualizar el título dinámicamente
+
+En páginas con varias secciones donde el título cambia sin cambiar de ruta, puedes actualizar el título desde cualquier componente disparando el evento `OVATITLEUPDATE`:
+
+```tsx
+import { EVENTS } from '@/shared/constants/events';
+
+// Desde cualquier componente — actualiza el título sin cambiar de ruta
+const actualizarTitulo = (nuevoTitulo: string) => {
+  const event = new CustomEvent(EVENTS.OVATITLEUPDATE, {
+    detail: { title: nuevoTitulo },
+    bubbles: true,
+    cancelable: true
+  });
+  document.dispatchEvent(event);
+};
+```
+
+`PageTitle` escucha este evento automáticamente y actualiza el título en pantalla sin necesidad de navegar.
+
+:::tip[Usa `OVATITLEUPDATE` en páginas con múltiples secciones]
+Si una página del OVA tiene varias secciones que representan temas distintos, puedes cambiar el título visible al avanzar de sección sin cambiar de ruta. Esto mantiene el contexto claro para el estudiante sin recargar la página.
+:::
+
+## Accesibilidad
+
+`PageTitle` usa dos `<h1>` para garantizar compatibilidad con lectores de pantalla:
+
+```tsx
+{/* H1 visual — acepta HTML para formato (bold, em, etc.) */}
+<h1 aria-hidden="true" dangerouslySetInnerHTML={{ __html: title.title }} />
+
+{/* H1 para lectores de pantalla — texto limpio sin HTML */}
+<h1 id={uid} className="u-sr-only">
+  Página {title.number}, {title.title}
+</h1>
+```
+
+El contenedor del título tiene `aria-live="polite"` para que los lectores de pantalla anuncien el cambio de título automáticamente al navegar entre páginas.
+
+La barra de progreso usa atributos ARIA de medidor:
+
+```tsx
+role="meter"
+aria-valuemin={0}
+aria-valuemax={pages.length}
+aria-valuenow={visitedPages.length}
+aria-label="Progreso de la unidad"
+```
+
+:::note[El título acepta HTML]
+El `title` del store puede contener etiquetas HTML como `<strong>` o `<em>` para formato visual. El componente lo renderiza con `dangerouslySetInnerHTML` en el h1 visible, y lo limpia automáticamente para el h1 de lectores de pantalla.
+:::

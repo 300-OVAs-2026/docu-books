@@ -1,4 +1,88 @@
 ---
 title: Layout
-description: Interfaz usada dentro de las OVAS
+description: Componente de estructura principal del OVA. Envuelve cada página con el header, footer, intérprete, notas flotantes y la barra de desarrollo.
 ---
+
+`Layout` es el esqueleto estructural que envuelve todas las páginas del OVA. Se encarga de montar el `Header`, el `Footer`, el `Interpreter`, las `FloatingNotes` y la `DevToolbar`, además de actualizar el título del documento según la página actual y respetar las preferencias de accesibilidad del usuario para animaciones.
+
+## Cómo implementarlo
+
+`Layout` ya está integrado en el router del proyecto — cada ruta lo usa como envoltorio. No necesitas agregarlo manualmente en las páginas del OVA:
+
+```tsx
+// App.tsx — ya configurado así en el proyecto
+<Route path="/p01">
+  <RouteGuard ovaPath="/p01">
+    <Layout>
+      <Suspense fallback={<Loader />}>
+        <PageVisitTracker path="/p01" kind={OvaPageKind.CONTENT}>
+          <OvaPage01 />
+        </PageVisitTracker>
+      </Suspense>
+    </Layout>
+  </RouteGuard>
+</Route>
+```
+
+Si por alguna razón necesitas usarlo directamente:
+
+```tsx
+import { Layout } from '@layouts';
+
+<Layout>
+  <MiPagina />
+</Layout>
+```
+
+## Props
+
+| Prop | Tipo | Req. | Descripción |
+|---|---|---|---|
+| `children` | `JSX.Element \| JSX.Element[]` | ✓ | Contenido de la página que se renderiza dentro del `<main>` |
+
+## Qué renderiza según la ruta
+
+`Layout` no siempre muestra todos sus elementos — algunos se ocultan dependiendo de la ruta actual:
+
+| Elemento | Portada `/` | Resto de páginas |
+|---|---|---|
+| `Header` | ✅ | ✅ |
+| `Interpreter` | ✅ | ✅ |
+| `FloatingNotes` | ❌ | ✅ (excepto `/notas`) |
+| `<main>` con `children` | ✅ | ✅ |
+| `Footer` | ❌ | ✅ |
+| `DevToolbar` | Solo en desarrollo | Solo en desarrollo |
+
+:::note[El Footer no aparece en la portada]
+`Layout` oculta el `Footer` en la ruta `/` (portada del OVA) porque la portada tiene su propio botón de entrada al contenido. En todas las demás rutas el `Footer` aparece normalmente.
+:::
+
+:::note[Las notas flotantes no aparecen en `/notas`]
+`FloatingNotes` se oculta en la ruta `/notas` para evitar que aparezca el botón flotante mientras se está viendo la página completa de notas.
+:::
+
+## Qué hace internamente
+
+**Título del documento** — actualiza `document.title` automáticamente al cambiar de página. Si la ruta es una página del OVA (`/page-N`), usa el título de esa página desde el store. Si no hay título específico, usa el `baseTitle` del OVA. Los tags HTML del título se eliminan antes de mostrarse.
+
+**Animaciones accesibles** — envuelve todo con `MotionConfig` de Framer Motion. Si el usuario tiene activada la opción de reducir movimiento en su sistema operativo (`useReduceMotion`) o en el panel de accesibilidad del OVA (`stopAnimations`), todas las animaciones se desactivan automáticamente con `reducedMotion="always"`.
+
+**DevToolbar** — renderiza la barra de herramientas de desarrollo solo cuando `import.meta.env.DEV` es `true`. En producción no aparece.
+
+:::caution[No anides `Layout` dentro de otro `Layout`]
+Como el router ya envuelve cada ruta con `Layout`, nunca lo uses dentro de una página — duplicarías el `Header`, `Footer` e `Interpreter`.
+
+```tsx
+// ❌ Incorrecto — el Layout ya lo agrega el router
+const OvaPage01 = () => (
+  <Layout>
+    <Content>...</Content>
+  </Layout>
+);
+
+// ✅ Correcto — solo el contenido de la página
+const OvaPage01 = () => (
+  <Content>...</Content>
+);
+```
+:::

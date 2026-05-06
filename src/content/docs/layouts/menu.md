@@ -1,4 +1,136 @@
 ---
 title: Menu
-description: Interfaz usada dentro de las OVAS
+description: Componente de navegación principal del OVA. Incluye el botón hamburguesa, controles de audio, intérprete, medallas y el panel de navegación completo.
 ---
+
+`Menu` es el componente de navegación principal que vive dentro del `Header`. Gestiona la apertura y cierre del panel de navegación, los controles de audio descriptivo, el botón del intérprete de lengua de señas y el contador de medallas. Se compone de dos subcomponentes internos: el propio `Menu` y `MenuButtonInterpreter`.
+
+## Cómo implementarlo
+
+`Menu` ya está montado dentro de `Header` — no necesitas usarlo directamente. Se renderiza automáticamente en todas las páginas del OVA:
+
+```tsx
+// Dentro de Header — ya configurado
+export const Header = () => {
+  return (
+    <HeaderProvider value={{ expanded, handleExpanded }}>
+      <header>
+        <Menu />  {/* ← ya está aquí */}
+      </header>
+    </HeaderProvider>
+  );
+};
+```
+
+:::note[No necesitas importarlo ni configurarlo]
+`Menu` se monta solo a través de `Header`. Si necesitas controlar la apertura de algún panel desde otro componente, usa `useHeaderContext` para acceder a `handleExpanded`.
+:::
+
+## Elementos del menú
+
+### Barra de controles (siempre visible)
+
+Los botones que aparecen siempre en el header, sin necesidad de abrir el panel:
+
+| Botón | Clase JS | Descripción |
+|---|---|---|
+| Hamburguesa | `js-menu-button--hamburger` | Abre y cierra el panel de navegación. El ícono anima entre ☰ y ✕ con Framer Motion |
+| Audio descriptivo | `js-button-audio-a11y` | Activa o pausa el audio de accesibilidad. Alterna entre play/pause |
+| Intérprete | `js-button-interpreter` | Muestra u oculta el intérprete de lengua de señas |
+| Medallas | `js-button-medals` | Link a `/medals`. Muestra el contador de medallas ganadas |
+
+### Panel de navegación (se abre con el hamburguesa)
+
+El panel deslizable con las rutas principales del OVA:
+
+| Opción | Ruta | Descripción |
+|---|---|---|
+| Inicio | `/` | Portada del OVA |
+| Menú | `/menu` | Mapa de aprendizaje |
+| Accesibilidad | — | Abre el `A11yOverlay` |
+| Avatar | `/avatar` | Selección o cambio de avatar |
+| Notas | `/notes` | Notas del estudiante |
+| Ayuda | `/help` | Página de ayuda y tour |
+
+:::caution[Las clases `js-` son contratos — no las cambies]
+Los botones de la barra de controles tienen clases con prefijo `js-` que el tour guiado de `Help` usa para ubicarlos en el DOM. Renombrar o quitar estas clases rompe el tour:
+
+```
+js-menu-button--hamburger  → paso 1 del tour
+js-button-audio-a11y       → paso 2 del tour
+js-button-interpreter      → paso 3 del tour
+js-button-medals           → paso 4 del tour
+```
+:::
+
+## Subcomponente — `MenuButtonInterpreter`
+
+`MenuButtonInterpreter` es el botón del intérprete de lengua de señas. Se incluye dentro de `Menu` automáticamente — no necesitas importarlo directamente.
+
+### Cómo funciona
+
+Cuando el estudiante pulsa el botón, `MenuButtonInterpreter` dispara un evento personalizado al DOM para notificar al componente `Interpreter` que debe mostrarse u ocultarse:
+
+```ts
+// Evento que se dispara al pulsar el botón
+const event = new CustomEvent(EVENT.VISIBILITY, {
+  detail: { hidden: value },
+  bubbles: true,
+  cancelable: true
+});
+document.dispatchEvent(event);
+```
+
+También escucha el evento `EVENT.CLOSED` — cuando el intérprete se cierra desde su propio componente (por ejemplo, al terminar el video), el botón actualiza su estado automáticamente para mantener la sincronía.
+
+:::note[Comunicación por eventos del DOM]
+El botón del intérprete no se comunica con `Interpreter` a través de props ni contexto — usa eventos del DOM (`CustomEvent`). Esto permite que ambos componentes estén desacoplados y vivan en distintas partes del árbol de componentes.
+:::
+
+## Tipos
+
+### `MenuExpanded`
+
+Estado que controla qué panel está abierto. Solo uno puede ser `true` a la vez:
+
+```ts
+type MenuExpanded = {
+  menu: boolean;  // panel de navegación hamburguesa
+  help: boolean;  // panel de ayuda (reservado)
+  a11y: boolean;  // panel de accesibilidad
+};
+```
+
+### `MenuOptions`
+
+Enum con los valores válidos para `handleExpanded`:
+
+```ts
+enum MenuOptions {
+  MENU = 'menu',   // abre/cierra el panel de navegación
+  HELP = 'help',   // abre/cierra la ayuda
+  A11Y = 'a11y',   // abre/cierra el panel de accesibilidad
+  RESET = 'reset'  // cierra todos los paneles
+}
+```
+
+### Cómo usar `handleExpanded` desde otro componente
+
+Si necesitas abrir o cerrar un panel desde un componente hijo del `Header`, usa el contexto:
+
+```tsx
+import { useHeaderContext } from '@layouts/header/header-context';
+import { MenuOptions } from '@layouts/header/types/types';
+
+const MiComponente = () => {
+  const { handleExpanded } = useHeaderContext();
+
+  return (
+    <button onClick={() => handleExpanded(MenuOptions.A11Y)}>
+      Abrir accesibilidad
+    </button>
+  );
+};
+```
+
+> `handleExpanded(MenuOptions.RESET)` cierra todos los paneles a la vez.
