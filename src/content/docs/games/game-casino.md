@@ -1,6 +1,4 @@
 ---
-sidebar:
-  order: 3
 title: Juego estilo casino educativo
 description: Componente GameCasino para crear actividades interactivas de selección múltiple con temática de casino educativo y apuestas.
 ---

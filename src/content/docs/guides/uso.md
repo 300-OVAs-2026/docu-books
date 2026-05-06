@@ -1,57 +1,48 @@
 ---
-title: Usos
-description: A guide in my new Starlight docs site.
+title: Guía de Uso y Buenas Prácticas
+description: Estándares de desarrollo, nomenclatura y convenciones para el equipo frontend de Books&Books.
 ---
 
-## 💻 Uso
+Esta guía establece los estándares técnicos para el desarrollo de OVAs en 2026. Seguir estas convenciones garantiza que el código sea mantenible, escalable y consistente entre diferentes proyectos.
 
-### Importar Componentes
+## Estructura y Nomenclatura
 
-```tsx
-// Actividades
-import { CheckboxActivity } from './core/components/activities/checkbox-activity'
-import { DndActivity } from './core/components/activities/dnd-activity'
+### Archivos de Página
+Para mantener la trazabilidad entre el diseño y el desarrollo, cada página de un OVA debe seguir estrictamente esta nomenclatura en minúsculas y usando guiones:
 
-// Juegos
-import { GameBallons } from './core/components/games/game-ballons'
-import { GameBottles } from './core/components/games/game-bottles'
+`ova-(número)-p(página).tsx`
 
-// Features
-import { DownloadLink } from './components/features/download-link'
-import { FullscreenButton } from './core/components/ui/fullscreen-button'
-```
+**Ejemplos:**
+- ✅ `ova-01-p01.tsx`
+- ✅ `ova-15-p12.tsx`
+- ❌ `OVA01P01.tsx` (No usar CamelCase)
+- ❌ `ova_01_p01.tsx` (No usar underscores)
 
-### Usar Hooks
+### Convención de Escritura
 
-```tsx
-import { useFullScreen } from './core/hooks/use-full-screen'
-import { useTitle } from './core/hooks/use-title'
-import { useKeyboardShortcuts } from './core/hooks/use-keyboard-shortcuts'
+Estamos migrando de `CamelCase` a `kebab-case` para nombres de archivos, carpetas y clases CSS. 
 
-function MyComponent() {
-  const { isFullscreen, toggleFullscreen } = useFullScreen()
-  useTitle('Mi Página')
-  useKeyboardShortcuts({
-    'Ctrl+F': toggleFullscreen
-  })
-  
-  return (
-    <div>
-      {/* Tu contenido */}
-    </div>
-  )
-}
-```
+- **Archivos/Carpetas:** `mi-componente-nuevo.tsx`
+- **Clases CSS:** `.u-button-primary`
+- **Variables CSS:** `--color-brand-primary`
 
-### Usar Utilidades
+---
+
+## Importaciones (Barrel Method)
+
+Para mantener los archivos limpios y facilitar las rutas, utilizamos **Barrel Exports** (archivos `index.ts` que centralizan las exportaciones). **Nunca** importes directamente desde la ruta profunda del archivo.
+
+### Uso correcto con Aliases
+
+Utilizamos alias configurados en el proyecto para evitar rutas relativas complejas como `../../../`.
 
 ```tsx
-import { focusMain } from './core/utils/focus-main'
-import { loadCSS } from './core/utils/load-css'
+// ✅ BIEN: Importaciones limpias vía Barrel y Alias
+import { CheckboxActivity, DndActivity } from '@activities';
+import { GameBallons, GameBottles } from '@games';
+import { Button, Modal, Toast } from '@ui';
+import { useFullScreen, useTitle } from '@shared/hooks';
 
-// Cargar CSS dinámicamente
-loadCSS('https://example.com/styles.css')
-
-// Enfocar elemento principal
-focusMain()
+// ❌ MAL: Importaciones directas y rutas relativas largas
+import { CheckboxActivity } from '../../components/activities/checkbox/checkbox-activity.tsx';
 ```

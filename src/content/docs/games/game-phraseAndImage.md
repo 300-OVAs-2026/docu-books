@@ -1,6 +1,4 @@
 ---
-sidebar:
-  order: 6
 title: Asociación de frases e imágenes
 description: Componente PhraseAndImage para crear actividades interactivas de asociación entre frases y elementos visuales, textuales o de audio.
 ---

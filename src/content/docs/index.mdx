@@ -6,33 +6,57 @@ hero:
   tagline: La fuente de verdad del equipo frontend de Books&Books. Componentes, actividades, hooks y utilidades para maquetar sin adivinar.
 ---
 
-import { CardGrid, Card } from "@astrojs/starlight/components";
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 <CardGrid>
-  <Card title="Actividades" icon="rocket">
-    Selección múltiple, crucigramas, campos de entrada, drag and drop,
-    relacionar conceptos, selectores, comparación y más.
-  </Card>
-  <Card title="Juegos" icon="star">
-    Botellas, casino educativo, peces, economía, asociación de frases e
-    imágenes, preguntas, canasta, espacial y globos.
-  </Card>
-  <Card title="Componentes UI" icon="puzzle">
-    Botones, modales, alertas, iconos, visor de cómics, fórmulas matemáticas,
-    tarjetas de memoria, tabla verdadero/falso y más.
-  </Card>
-  <Card title="Hooks" icon="setting">
-    Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas,
-    atajos de teclado, sesión y título de página.
-  </Card>
-  <Card title="Utilidades" icon="seti:config">
-    Eventos de video, actualización de títulos, control de foco, gestión de
-    atajos de teclado y carga dinámica de CSS.
-  </Card>
-  <Card title="Constantes" icon="open-book">
-    Definición de eventos del sistema, teclas de accesibilidad y expresiones
-    regulares para limpieza de HTML.
-  </Card>
+  <LinkCard
+    title="Actividades"
+    icon="rocket"
+    href="/docu-books/activities/checkbox-activity/"
+    description="Selección múltiple, crucigramas, campos de entrada, drag and drop, relacionar conceptos, selectores y más."
+  />
+  <LinkCard
+    title="Juegos"
+    icon="star"
+    href="/docu-books/games/game-ballons/"
+    description="Botellas, casino educativo, peces, economía, asociación de frases e imágenes, preguntas, espacial y globos."
+  />
+  <LinkCard
+    title="Layouts"
+    icon="template"
+    href="/docu-books/layouts/content/"
+    description="Estructuras de página, contenedores principales y organización de vistas para diferentes tipos de contenido."
+  />
+  <LinkCard
+    title="Componentes UI"
+    icon="puzzle"
+    href="/docu-books/ui/accordion/"
+    description="Botones, modales, alertas, iconos, acordeones, imágenes con leyenda, cargadores y contenedores decorativos."
+  />
+  <LinkCard
+    title="Scripts"
+    icon="document"
+    href="/docu-books/scripts/clone/"
+    description="Lógica de validación, manejo de eventos y scripts utilitarios para el comportamiento interactivo."
+  />
+  <LinkCard
+    title="Hooks"
+    icon="random"
+    href="/docu-books/hooks/use-a11y-attribute/"
+    description="Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas, atajos de teclado y sesión."
+  />
+  <LinkCard
+    title="Utilidades"
+    icon="config"
+    href="/docu-books/utilities/current-paragraph/"
+    description="Eventos de video, actualización de títulos, control de foco y gestión de navegación."
+  />
+  <LinkCard
+    title="Constantes"
+    icon="list-format"
+    href="/docu-books/const/"
+    description="Definición de eventos globales, teclas de accesibilidad y expresiones regulares estándar."
+  />
 </CardGrid>
 
 <style>{`
@@ -56,7 +80,8 @@ import { CardGrid, Card } from "@astrojs/starlight/components";
 
   .card:hover {
     border-color: color-mix(in srgb, var(--sl-color-text) 25%, transparent) !important;
-    transform: translateY(-2px);
+    transform: translateY(-5px) !important;
+    box-shadow: 0 10px 20px -10px color-mix(in srgb, var(--sl-color-text) 15%, transparent) !important;
   }
 
   .card .icon {
@@ -64,5 +89,10 @@ import { CardGrid, Card } from "@astrojs/starlight/components";
     border-radius: 0.5rem !important;
     padding: 0.35rem !important;
     color: var(--sl-color-text) !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .card:hover .icon {
+    transform: scale(1.1) rotate(5deg) !important;
   }
 `}</style>
