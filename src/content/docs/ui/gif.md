@@ -1,5 +1,5 @@
 ---
-title: Gif Animado (Video)
+title: Gif
 description: Componente para mostrar animaciones tipo GIF con optimización de video y control de accesibilidad.
 ---
 

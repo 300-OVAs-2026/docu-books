@@ -1,5 +1,5 @@
 ---
-title: Reproductor de Video
+title: Video
 description: Componente para incrustar videos con controles personalizados, poster y pie de foto.
 ---
 

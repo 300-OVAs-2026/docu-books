@@ -1,5 +1,5 @@
 ---
-title: Botón (Button)
+title: Button
 description: Componente de botón personalizado con soporte para variantes, iconos y accesibilidad.
 ---
 

@@ -35,6 +35,7 @@ export default defineConfig({
         },
         { label: 'Actividades', autogenerate: { directory: 'activities' } },
         { label: 'Juegos', autogenerate: { directory: 'games' } },
+        { label: 'Layouts', autogenerate: { directory: 'layouts' } },
         { label: 'Componentes UI', autogenerate: { directory: 'ui' } },
         { label: 'Scripts', autogenerate: { directory: 'scripts' }, badge: { text: '¡Nuevo!', variant: 'tip' } },
         { label: 'Hooks', autogenerate: { directory: 'hooks' } },
