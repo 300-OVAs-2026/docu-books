@@ -16,7 +16,7 @@ El acordeón utiliza un patrón de **Componentes Compuestos** para ofrecer flexi
 ### Ejemplo básico
 
 ```tsx
-import { Accordion } from '@shared/components/ui';
+import { Accordion } from '@ui';
 
 const MyComponent = () => {
   return (

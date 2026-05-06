@@ -28,23 +28,20 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/300-OVAs-2026/core' }],
       sidebar: [
         {
-          label: 'Guías',
-          autogenerate: { directory: 'guides' },
-          collapsed: true, // El acordeón empezará cerrado
-          badge: { text: '¡Nuevo!', variant: 'tip' }
+          label: 'Guías', autogenerate: { directory: 'guides' }, badge: { text: '¡Nuevo!', variant: 'tip' }
         },
-        { label: 'Actividades', autogenerate: { directory: 'activities' } },
-        { label: 'Juegos', autogenerate: { directory: 'games' } },
-        { label: 'Layouts', autogenerate: { directory: 'layouts' } },
-        { label: 'Componentes UI', autogenerate: { directory: 'ui' } },
-        { label: 'Scripts', autogenerate: { directory: 'scripts' }, badge: { text: '¡Nuevo!', variant: 'tip' } },
-        { label: 'Hooks', autogenerate: { directory: 'hooks' } },
-        { label: 'Utilidades', autogenerate: { directory: 'utilities' } },
-        { label: 'Constantes', autogenerate: { directory: 'const' } }
+        { label: 'Actividades', autogenerate: { directory: 'activities' }, collapsed: true },
+        { label: 'Juegos', autogenerate: { directory: 'games' }, collapsed: true },
+        { label: 'Layouts', autogenerate: { directory: 'layouts' }, collapsed: true },
+        { label: 'Componentes UI', autogenerate: { directory: 'ui' }, collapsed: true },
+        { label: 'Scripts', autogenerate: { directory: 'scripts' }, collapsed: true },
+        { label: 'Hooks', autogenerate: { directory: 'hooks' }, collapsed: true },
+        { label: 'Utilidades', autogenerate: { directory: 'utilities' }, collapsed: true },
+        { label: 'Constantes', autogenerate: { directory: 'const' }, collapsed: true }
       ],
     }),
     react(),
-    UnoCSS({ injectReset: false }) // Disabled injectReset to avoid breaking Starlight defaults
+    UnoCSS({ injectReset: false })
   ],
 
   vite: {

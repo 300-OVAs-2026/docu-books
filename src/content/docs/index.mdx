@@ -4,19 +4,11 @@ description: Todo lo que necesita el equipo frontend para maquetar con consisten
 tableOfContents: false
 hero:
   tagline: La fuente de verdad del equipo frontend de Books&Books. Componentes, actividades, hooks y utilidades para maquetar sin adivinar.
-  actions:
-    - text: Empezar a leer
-      link: /guides/uso/
-      icon: right-arrow
-      variant: primary
-    - text: Ver actividades
-      link: /activities/checkbox-activity/
-      icon: rocket
 ---
 
 import { CardGrid, Card } from "@astrojs/starlight/components";
 
-<CardGrid stagger>
+<CardGrid>
   <Card title="Actividades" icon="rocket">
     Selección múltiple, crucigramas, campos de entrada, drag and drop,
     relacionar conceptos, selectores, comparación y más.
@@ -49,26 +41,28 @@ import { CardGrid, Card } from "@astrojs/starlight/components";
     grid-template-columns: 1fr;
   }
 
-  /* Cards con fondo degradado */
+  .hero .tagline {
+    max-width: 48rem;
+    font-size: 1.05rem;
+  }
+
+  /* Cards minimalistas */
   .card {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--sl-color-accent, #7d0096) 18%, var(--sl-color-bg-nav)) 0%,
-      var(--sl-color-bg-nav) 100%
-    ) !important;
-    border: 1px solid color-mix(in srgb, var(--sl-color-accent, #7d0096) 30%, transparent) !important;
-    border-radius: 0.75rem !important;
+    background: color-mix(in srgb, var(--sl-color-bg) 92%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--sl-color-text) 10%, transparent) !important;
+    border-radius: 0.65rem !important;
     transition: border-color 0.2s ease, transform 0.2s ease !important;
   }
 
   .card:hover {
-    border-color: color-mix(in srgb, var(--sl-color-accent, #7d0096) 60%, transparent) !important;
+    border-color: color-mix(in srgb, var(--sl-color-text) 25%, transparent) !important;
+    transform: translateY(-2px);
   }
 
   .card .icon {
-    background-color: color-mix(in srgb, var(--sl-color-accent, #7d0096) 20%, transparent) !important;
+    background-color: color-mix(in srgb, var(--sl-color-text) 8%, transparent) !important;
     border-radius: 0.5rem !important;
     padding: 0.35rem !important;
-    color: var(--sl-color-accent-high, #c084fc) !important;
+    color: var(--sl-color-text) !important;
   }
 `}</style>
