@@ -1,9 +1,28 @@
 ---
+order: 1
 title: Guía de Uso y Buenas Prácticas
 description: Estándares de desarrollo, nomenclatura y convenciones para el equipo frontend de Books&Books.
 ---
 
 Esta guía establece los estándares técnicos para el desarrollo de OVAs en 2026. Seguir estas convenciones garantiza que el código sea mantenible, escalable y consistente entre diferentes proyectos.
+
+## Manejo de Assets y Recursos
+
+### Formato de Imágenes
+Para asegurar un rendimiento óptimo y tiempos de carga rápidos, **todas las imágenes deben utilizar el formato WebP**. 
+
+- ✅ `imagen-ejemplo.webp`
+- ❌ `imagen-ejemplo.png` / `imagen-ejemplo.jpg`
+
+*Tip: Si recibes recursos en otros formatos, utiliza herramientas de conversión para pasarlos a WebP antes de incluirlos en el proyecto.*
+
+### Gestión de la carpeta `/public`
+La carpeta `public/assets/` contiene recursos críticos del núcleo del OVA. Se deben seguir estas reglas estrictas para evitar errores en la visualización o el funcionamiento:
+
+1.  **Carpetas Protegidas:** No se debe borrar ni modificar el contenido de las carpetas `base`, `fonts` e `icons`.
+2.  **Excepción `base`:** El único archivo que se permite (y se debe) reemplazar dentro de `public/assets/base/` es el `cover.webp`, que corresponde a la portada del OVA.
+
+---
 
 ## Estructura y Nomenclatura
 

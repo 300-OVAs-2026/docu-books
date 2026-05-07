@@ -18,7 +18,7 @@ export default defineConfig({
   base: '/docu-books/',
   integrations: [
     starlight({
-      title: 'Books&Books 2026',
+      title: 'OVAS 2026',
       defaultLocale: 'root',
       locales: {
         root: {
