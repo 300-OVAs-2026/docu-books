@@ -3,6 +3,8 @@ title: Juego de memoria
 description: Componente MemoryCardActivity para crear actividades interactivas de memoria donde el estudiante encuentra las parejas de cartas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `MemoryCardActivity` es el componente raíz para crear juegos de memoria donde el estudiante voltea cartas para encontrar las parejas. Gestiona el estado de selección, emparejamiento y resultado. Se compone de cinco subcomponentes: `MemoryCardActivity.Board`, `MemoryCardActivity.Card`, `MemoryCardActivity.CardFront`, `MemoryCardActivity.CardBack` y `MemoryCardActivity.Button`.
 
 ## Vista previa
@@ -284,6 +286,8 @@ Fondo visual del tablero. Siempre va primero dentro de `<MemoryCardActivity>`.
 ### `MemoryCardActivity.Card`
 
 Cada carta del tablero. Siempre contiene un `CardBack` y un `CardFront`. Dos cartas con el mismo `id` forman una pareja.
+
+<CoreRepoInfo corePath="components/games/game-memory-card/card.tsx" />
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|

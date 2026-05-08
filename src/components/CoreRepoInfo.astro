@@ -1,0 +1,48 @@
+---
+// src/components/CoreRepoInfo.astro
+interface Props {
+  corePath: string;
+}
+
+const { corePath } = Astro.props;
+
+const apiUrl = `https://api.github.com/repos/300-OVAs-2026/core/commits?path=${corePath}&sha=develop&per_page=1`;
+
+let lastUpdated = 'Desconocida';
+
+try {
+  const response = await fetch(apiUrl);
+  if (response.ok) {
+    const data = await response.json();
+    if (data && data.length > 0) {
+      const dateString = data[0].commit.committer.date;
+      lastUpdated = new Date(dateString).toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+  }
+} catch (error) {
+  console.error("Error obteniendo datos del repo core", error);
+}
+
+const viewUrl = `https://github.com/300-OVAs-2026/core/blob/develop/${corePath}`;
+console.log("Último cambio en Core:", viewUrl);
+---
+
+<div class="mt-12 border border-gray-200 dark:border-gray-800 rounded-lg p-5 bg-gray-50/50 dark:bg-gray-900/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm font-sans not-content">
+  <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+    <span><strong>Último cambio en Core:</strong> {lastUpdated}</span>
+  </div>
+  <a 
+    href={viewUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.5-1.4 6.5-7a4.6 4.6 0 0 0-1.39-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.35-3.5 1.36a11.3 11.3 0 0 0-6 0c-2.4-1.71-3.5-1.36-3.5-1.36a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 2 8.98c0 5.6 3.35 6.65 6.5 7A4.8 4.8 0 0 0 8 19v3"/></svg>
+    Ver componente
+  </a>
+</div>
