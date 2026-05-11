@@ -3,6 +3,8 @@ title: Juego de botellas
 description: Componente GameBottle para crear actividades interactivas donde el estudiante forma una palabra seleccionando letras de botellas animadas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameBottle` es el componente raíz para crear actividades donde el estudiante arma una palabra seleccionando letras que aparecen en botellas animadas. Gestiona el estado de selección, validación y resultado. Se compone de cinco subcomponentes: `GameBottle.Letters`, `GameBottle.Word`, `GameBottle.Actions`, `GameBottle.Description` y el raíz `GameBottle`.
 
 :::caution[Diseñado para adivinar palabras]
@@ -206,6 +208,8 @@ Contenedor raíz. Gestiona el estado de selección de letras, validación y resu
 |---|---|---|---|
 | `onResult` | `(result: boolean) => void` | | Callback al comprobar. Recibe directamente el booleano del resultado — sin destructuring |
 
+<CoreRepoInfo corePath="components/games/game-bottles/game-bottles.tsx" />
+
 ---
 
 ### `GameBottle.Letters`
@@ -216,11 +220,15 @@ Genera las botellas animadas con las letras de la palabra. Siempre va primero de
 |---|---|---|---|
 | `word` | `string` | ✓ | Palabra completa a adivinar. Se recomienda en mayúsculas (ej: `"ECOSISTEMA"`) |
 
+<CoreRepoInfo corePath="components/games/game-bottles/game-bottles-letters.tsx" />
+
 ---
 
 ### `GameBottle.Word`
 
 Muestra los espacios vacíos donde el estudiante arma la palabra. No recibe props — se sincroniza automáticamente con el contexto del juego.
+
+<CoreRepoInfo corePath="components/games/game-bottles/game-bottles-word.tsx" />
 
 ---
 
@@ -232,8 +240,12 @@ Envuelve un botón de acción. Cada botón va en su propio `Actions`.
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como Comprobar. Con `"reset"` limpia las letras seleccionadas |
 
+<CoreRepoInfo corePath="components/games/game-bottles/game-bottles-actions.tsx" />
+
 ---
 
 ### `GameBottle.Description`
 
 Contenedor opcional para el pie de figura o descripción de la animación. Acepta cualquier JSX como contenido.
+
+<CoreRepoInfo corePath="components/games/game-bottles/game-bottles-description.tsx" />

@@ -3,6 +3,8 @@ title: Juego estilo casino educativo
 description: Componente GameCasino para crear actividades interactivas de selección múltiple con temática de casino educativo y apuestas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameCasino` es el componente raíz para crear actividades de selección múltiple ambientadas en un casino educativo. El estudiante elige una opción y realiza una apuesta — si acierta, gana fichas. Gestiona el estado de selección y resultado. Se compone de cuatro subcomponentes: `GameCasino.Init`, `GameCasino.Level`, `GameCasino.Element` y `GameCasino.Button`.
 
 :::caution[El handler de validación es diferente a otros juegos]
@@ -314,6 +316,8 @@ Contenedor raíz. Envuelve todas las secciones del juego dentro del `Panel`.
 |---|---|---|---|
 | `onResult` | `(data: { options: { id: string }[] }) => void` | | Callback al comprobar. Recibe el array de opciones seleccionadas — no un booleano |
 
+<CoreRepoInfo corePath="components/games/game-casino/game-casino.tsx" />
+
 ---
 
 ### `GameCasino.Init`
@@ -325,6 +329,8 @@ Pantalla de introducción con animación de casino. Va en la primera sección de
 | `textInit` | `string` | | Texto de instrucciones visible en la pantalla de inicio |
 | `className` | `string` | | Clases CSS adicionales para el contenedor |
 
+<CoreRepoInfo corePath="components/games/game-casino/game-casino-init.tsx" />
+
 ---
 
 ### `GameCasino.Level`
@@ -335,6 +341,8 @@ Contenedor de la pregunta y sus opciones. Soporta imagen de fondo personalizada.
 |---|---|---|---|
 | `label` | `string` | ✓ | Texto de la pregunta |
 | `background` | `string` | | Ruta de imagen de fondo personalizada. Si se omite usa el fondo por defecto |
+
+<CoreRepoInfo corePath="components/games/game-casino/game-casino-level.tsx" />
 
 ---
 
@@ -350,6 +358,8 @@ Cada opción de respuesta. Muestra un bullet visible (A, B, C, D) junto al texto
 | `state` | `"success" \| "wrong"` | ✓ | Define si la opción es correcta o incorrecta |
 | `bullet` | `string` | ✓ | Letra visible junto a la opción (ej: `"A"`, `"B"`, `"C"`, `"D"`) |
 
+<CoreRepoInfo corePath="components/games/game-casino/game-casino-element.tsx" />
+
 ---
 
 ### `GameCasino.Button`
@@ -359,3 +369,5 @@ Botón de acción. Siempre debe ir dentro de `<GameCasino>`, fuera del `Level`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-casino/game-casino-button.tsx" />

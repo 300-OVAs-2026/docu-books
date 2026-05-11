@@ -2,6 +2,7 @@
 title: Juego de quién quiere ser millonario
 description: Componente GameMilions para crear la actividad interactiva inspirada en el juego "Quién Quiere ser Millonario".
 ---
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
 
 `GameMillions` es el componente que envuelve y gestiona el juego interactivo estilo "Quién Quiere Ser Millonario". Coordina la validación de las opciones elegidas, el puntaje actual (dinero) y maneja el estado de la pregunta activa. Se divide en los subcomponentes `GameMilions.Element` para las opciones y `GameMilions.Button` para las acciones.
 
@@ -159,6 +160,8 @@ Junto a la estructura de tu vista, agrega el modal principal de gamificación y 
 | `onMoneyChange` | `(value: number) => void` | | Callback que se gatilla tras una comprobación, recibiendo el nuevo valor de `money`. |
 | `onQuestionChange` | `(index: number) => void` | | Evento al cambiar de pregunta/nivel (útil para gestionar multipartes). |
 
+<CoreRepoInfo corePath="components/games/game-millions/game-millions.tsx" />
+
 ## Props de GameMilions.Element
 
 Representa cada una de las opciones a elegir dentro del juego.
@@ -170,6 +173,8 @@ Representa cada una de las opciones a elegir dentro del juego.
 | `label` | `string` | ✓ | El texto que se presentará como la opción de respuesta. |
 | `state` | `"success"` \| `"wrong"` | ✓ | Define si esta opción es la respuesta correcta (`success`) o no (`wrong`). |
 
+<CoreRepoInfo corePath="components/games/game-millions/game-million-element.tsx" />
+
 ## Props de GameMilions.Button
 
 Sirve de wrapper controlador de los botones de interacción interna.
@@ -178,3 +183,6 @@ Sirve de wrapper controlador de los botones de interacción interna.
 |---|---|---|---|
 | `type` | `"check"` \| `"reset"` \| `"next"` | ✓ | Define la acción del botón dentro de la mecánica del juego. |
 | `children` | `ReactElement` | ✓ | Generalmente un `<Button>` u otro componente pulsable al que se le inyectarán las propiedades. |
+
+<CoreRepoInfo corePath="components/games/game-millions/game-millions-button.tsx" />
+

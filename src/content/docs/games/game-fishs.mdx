@@ -3,6 +3,8 @@ title: Juego de peces
 description: Componente GameFish para crear actividades interactivas donde el estudiante selecciona el pez con la palabra correcta para completar una oración.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameFish` es el componente raíz para crear actividades donde peces animados nadan en pantalla y el estudiante hace clic en el que contiene la palabra correcta para completar una oración. Gestiona el estado de selección, validación y resultado. Se compone de cuatro subcomponentes: `GameFish.Init`, `GameFish.Level`, `GameFish.Fish` y `GameFish.Button`.
 
 ### Vista previa del componente de instrucciones
@@ -216,6 +218,8 @@ Contenedor raíz de cada pregunta. Cada pregunta es un `<GameFish>` independient
 |---|---|---|---|
 | `onResult` | `({ result: boolean }) => void` | | Callback al comprobar. Recibe `true` si el pez seleccionado tiene `state="success"` |
 
+<CoreRepoInfo corePath="components/games/game-fish/game-fish.tsx" />
+
 ---
 
 ### `GameFish.Init`
@@ -226,6 +230,8 @@ Pantalla de instrucciones del juego. Se usa una sola vez, en una sección antes 
 |---|---|---|---|
 | `labelInstruction` | `string` | ✓ | Texto de instrucciones que se muestra al estudiante antes de comenzar |
 
+<CoreRepoInfo corePath="components/games/game-fish/game-fish-init.tsx" />
+
 ---
 
 ### `GameFish.Level`
@@ -235,6 +241,8 @@ Contiene la oración incompleta y los peces. Siempre va dentro de `<GameFish>`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `label` | `string` | ✓ | Oración incompleta. Usa `___` para indicar el espacio en blanco |
+
+<CoreRepoInfo corePath="components/games/game-fish/game-fish-level.tsx" />
 
 ---
 
@@ -251,6 +259,8 @@ Cada pez animado con una palabra o frase. Van dentro de `GameFish.Level`.
 
 > Debe haber exactamente un `state="success"` por nivel.
 
+<CoreRepoInfo corePath="components/games/game-fish/game-fish-element.tsx" />
+
 ---
 
 ### `GameFish.Button`
@@ -260,3 +270,5 @@ Botón de acción. Siempre debe ir dentro de `<GameFish>`, fuera del `Level`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-fish/game-fish-button.tsx" />

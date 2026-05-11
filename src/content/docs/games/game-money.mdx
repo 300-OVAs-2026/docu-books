@@ -3,6 +3,8 @@ title: Juego de dinero/economía
 description: Componente GameMoney para crear actividades interactivas de selección múltiple con temática de economía y dinero.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameMoney` es el componente raíz para crear preguntas de selección múltiple con temática económica. El estudiante elige la respuesta correcta entre varias opciones. Gestiona el estado de selección, validación y resultado con un retardo configurable antes de mostrar el resultado. Se compone de tres subcomponentes: `GameMoney.Level`, `GameMoney.Radio` y `GameMoney.Button`.
 
 ## Vista previa
@@ -227,6 +229,8 @@ El retardo de 900ms por defecto está pensado para que la animación del resulta
 ```
 :::
 
+<CoreRepoInfo corePath="components/games/game-money/game-money.tsx" />
+
 ---
 
 ### `GameMoney.Level`
@@ -237,6 +241,8 @@ Contenedor de la pregunta y sus opciones. Accede al contexto interno para mostra
 |---|---|---|---|
 | `label` | `string` | ✓ | Texto de la pregunta |
 | `addClass` | `string` | | Clases utilitarias adicionales para el contenedor del nivel |
+
+<CoreRepoInfo corePath="components/games/game-money/game-money-level.tsx" />
 
 ---
 
@@ -253,6 +259,8 @@ Cada opción de respuesta dentro de un nivel.
 
 > Debe haber exactamente un `state="success"` por nivel.
 
+<CoreRepoInfo corePath="components/games/game-money/game-money-radio.tsx" />
+
 ---
 
 ### `GameMoney.Button`
@@ -262,3 +270,5 @@ Botón de acción. Siempre debe ir dentro de `<GameMoney>`, fuera del `Level`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-money/game-money-button.tsx" />

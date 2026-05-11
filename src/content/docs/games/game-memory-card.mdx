@@ -204,7 +204,7 @@ La actividad se arma en cuatro partes dentro de `<MemoryCardActivity>`.
     </MemoryCardActivity.CardFront>
   </MemoryCardActivity.Card>
 
-  <MemoryCardActivity.Card id={2}>
+  <MemoryCardActivity.Card id={2}>  
     <MemoryCardActivity.CardBack>
       <div><img src="assets/images/reverso.webp" alt="?" /></div>
       <div><p>Lo que sé</p></div>
@@ -270,6 +270,7 @@ Contenedor raíz. Gestiona el estado de todas las cartas, los emparejamientos y 
 |---|---|---|---|
 | `onResult` | `(result: boolean) => void` | ✓ | Callback al comprobar. Recibe directamente el booleano — sin desestructurar |
 
+<CoreRepoInfo corePath="components/games/game-memory-card/memory-card-activity.tsx" /> 
 ---
 
 ### `MemoryCardActivity.Board`
@@ -281,18 +282,19 @@ Fondo visual del tablero. Siempre va primero dentro de `<MemoryCardActivity>`.
 | `background` | `string` | | Ruta de la imagen de fondo del tablero |
 | `addClass` | `string` | | Clases utilitarias adicionales |
 
+<CoreRepoInfo corePath="components/games/game-memory-card/memory-board.tsx" />
 ---
 
 ### `MemoryCardActivity.Card`
 
 Cada carta del tablero. Siempre contiene un `CardBack` y un `CardFront`. Dos cartas con el mismo `id` forman una pareja.
 
-<CoreRepoInfo corePath="components/games/game-memory-card/card.tsx" />
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `id` | `number` | ✓ | Identificador de la pareja. Las dos cartas de una misma pareja deben tener el mismo `id` |
 
+<CoreRepoInfo corePath="components/games/game-memory-card/card.tsx" />
 ---
 
 ### `MemoryCardActivity.CardBack`
@@ -305,6 +307,7 @@ Cara trasera de la carta — lo que el estudiante ve cuando la carta está boca 
 
 Cara delantera de la carta — lo que se revela cuando el estudiante la voltea. Acepta cualquier JSX.
 
+<CoreRepoInfo corePath="components/games/game-memory-card/card-item.tsx" />
 ---
 
 ### `MemoryCardActivity.Button`
@@ -314,3 +317,5 @@ Botón de acción. Siempre va dentro de `<MemoryCardActivity>`, fuera de las car
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` voltea todas las cartas boca abajo y reinicia el estado |
+
+<CoreRepoInfo corePath="components/games/game-memory-card/memory-card-button.tsx" />

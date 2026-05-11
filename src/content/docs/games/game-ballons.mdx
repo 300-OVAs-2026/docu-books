@@ -3,6 +3,8 @@ title: Juego de globos
 description: Componente GameBalloons para crear un juego de ordenamiento de frases y palabras por medio de globos interactivos.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameBalloons` es el componente que orquesta la actividad interactiva de ordenar palabras utilizando globos. El jugador debe seleccionar los globos en el orden correcto para formar la frase esperada. El componente gestiona la validación, el estado de los globos y las respuestas. Se divide en los subcomponentes `GameBalloons.Level` para configurar cada nivel o ronda y `GameBalloons.Button` para las acciones.
 
 ## Vista previa
@@ -148,6 +150,8 @@ El componente envolvente principal que maneja el estado.
 |---|---|---|---|
 | `onResult` | `({ result, options }) => void` | | Función callback llamada tras validar la respuesta. Recibe un booleano `result` indicando si la respuesta fue correcta y el detalle `options`. |
 
+<CoreRepoInfo corePath="components/games/game-balloons/game-balloons.tsx" />
+
 ## Props de GameBalloons.Level
 
 Componente que define la oración u ordenamiento requerido en la vista.
@@ -157,6 +161,8 @@ Componente que define la oración u ordenamiento requerido en la vista.
 | `words` | `string[]` | ✓ | Array con las palabras o fragmentos (mostrados en desorden). Por cada elemento se generará un globo en pantalla. |
 | `sentence` | `string` | ✓ | La frase correcta esperada. Este campo es contra el que se valida la respuesta del usuario (ignorando mayúsculas, espacios y signos de puntuación). |
 
+<CoreRepoInfo corePath="components/games/game-balloons/game-balloons-level.tsx" />
+
 ## Props de GameBalloons.Button
 
 Wrapper controlador de los botones de interacción interna.
@@ -165,3 +171,5 @@ Wrapper controlador de los botones de interacción interna.
 |---|---|---|---|
 | `type` | `"reset"` \| `"next"` \| `undefined` | | Omítelo para que el botón valide la respuesta. Usa `"reset"` para reiniciarla, o `"next"` para la navegación después de acertar. |
 | `children` | `ReactElement` | ✓ | Componente clickeable (como `<Button>`) al que se inyectarán las interacciones y estados `disabled`. |
+
+<CoreRepoInfo corePath="components/games/game-balloons/game-balloons-button.tsx" />

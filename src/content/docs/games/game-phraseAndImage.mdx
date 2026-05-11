@@ -3,6 +3,8 @@ title: Asociación de frases e imágenes
 description: Componente PhraseAndImage para crear actividades interactivas de asociación entre frases y elementos visuales, textuales o de audio.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `PhraseAndImage` es el componente raíz para crear actividades donde el estudiante asocia frases o preguntas con imágenes, textos o audios. Gestiona el estado de selección, validación y resultado. Se compone de cinco subcomponentes: `PhraseAndImage.Modal`, `PhraseAndImage.selectImage`, `PhraseAndImage.selectText`, `PhraseAndImage.selectAudio` y `PhraseAndImage.Button`.
 
 :::note[Tres variaciones según el tipo de respuesta]
@@ -292,11 +294,15 @@ Contenedor raíz. El `type` define el modo del juego y qué subcomponente de sel
 | `numCorrects` | `number` | ✓ | Número de asociaciones correctas necesarias para superar la actividad |
 | `onResult` | `(result: boolean) => void` | | Callback al comprobar. Recibe directamente el booleano del resultado |
 
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/phrase-and-image.tsx" />
+
 ---
 
 ### `PhraseAndImage.Modal`
 
 Contenedor de las opciones de respuesta. Siempre va dentro de `<PhraseAndImage>`, antes de los botones.
+
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/pharase-and-image-modal.tsx" />
 
 ---
 
@@ -311,6 +317,8 @@ Opción de tipo imagen. Solo usar cuando `type="image"`.
 | `url` | `string` | ✓ | Ruta de la imagen |
 | `alt` | `string` | ✓ | Texto alternativo accesible de la imagen |
 
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/image-element.tsx" />
+
 ---
 
 ### `PhraseAndImage.selectText`
@@ -320,6 +328,8 @@ Opción de tipo texto. Solo usar cuando `type="text"`. Acepta cualquier JSX como
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `join` | `number` | ✓ | Número que empareja este texto con la tarjeta del `initialCards` que tenga el mismo `join` |
+
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/text-element.tsx" />
 
 ---
 
@@ -333,6 +343,8 @@ Opción de tipo audio. Solo usar cuando `type="audio"`.
 | `join` | `number` | ✓ | Número que empareja este audio con la tarjeta del `initialCards` que tenga el mismo `join` |
 | `urlAudio` | `string` | ✓ | Ruta del archivo de audio |
 
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/audio-element.tsx" />
+
 ---
 
 ### `PhraseAndImage.Button`
@@ -342,3 +354,5 @@ Botón de acción. Siempre va dentro de `<PhraseAndImage>`, fuera del `Modal`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia todas las asociaciones |
+
+<CoreRepoInfo corePath="components/games/game-phrase-and-image/phrase-and-image-button.tsx" />

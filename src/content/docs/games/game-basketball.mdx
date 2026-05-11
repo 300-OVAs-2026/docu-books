@@ -3,6 +3,9 @@ title: Juego de basquetball
 description: Componente GameBasketball para crear actividades de selección múltiple con temática de baloncesto animada.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
+
 `GameBasketball` es el componente raíz para crear preguntas de selección múltiple ambientadas en una cancha de baloncesto. El estudiante elige la respuesta correcta y lanza el balón a la canasta. Gestiona el estado de selección, validación y resultado con un retardo configurable. Se compone de tres subcomponentes: `GameBasketball.Provider`, `GameBasketball.Radio` y `GameBasketball.Button`.
 
 ## Vista previa
@@ -190,6 +193,8 @@ El retardo de 900ms por defecto está pensado para que la animación del lanzami
 ```
 :::
 
+<CoreRepoInfo corePath="components/games/game-basketball/game-basketball.tsx" />
+
 ---
 
 ### `GameBasketball.Provider`
@@ -199,6 +204,8 @@ Contenedor de la pregunta y sus opciones.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `question` | `string` | ✓ | Texto de la pregunta |
+
+<CoreRepoInfo corePath="components/games/game-basketball/game-basketball-context.ts" />
 
 ---
 
@@ -215,6 +222,8 @@ Cada opción de respuesta dentro de un `Provider`.
 
 > Debe haber exactamente un `state="success"` por `Provider`.
 
+<CoreRepoInfo corePath="components/games/game-basketball/game-backetball-radio.tsx" />
+
 ---
 
 ### `GameBasketball.Button`
@@ -224,3 +233,5 @@ Botón de acción. Siempre debe ir dentro de `<GameBasketball>`, fuera del `Prov
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-basketball/game-basketball-button.tsx" />
