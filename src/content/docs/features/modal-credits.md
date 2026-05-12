@@ -1,0 +1,60 @@
+---
+title: Modal Credits
+description: Componente para visualizar los créditos, autores y licencias del OVA.
+---
+
+El componente `ModalCredits` permite desplegar una ventana modal que contiene la información institucional, los nombres de los docentes responsables y las licencias de uso del recurso educativo digital.
+
+## Cómo implementar
+
+El componente consume información específica sobre la escuela y los docentes para formatear el listado de créditos de acuerdo a los estándares institucionales.
+
+### Ejemplo básico
+
+```tsx
+import { ModalCredits } from '@features';
+
+const AppLayout = ({ isOpen, onClose }) => {
+  return (
+    <ModalCredits 
+      isOpen={isOpen} 
+      onClose={onClose} 
+      school="Escuela de Ciencias Básicas, Tecnología e Ingeniería - ECBTI"
+      course="Algoritmos"
+      teachers={["Juan Pérez", "María Rodríguez"]}
+      audio="assets/audios/creditos.mp3"
+    />
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `ModalCredits`
+
+Este componente extiende las propiedades base de `Modal`.
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `school` | `string` | **(Requerido)** Nombre de la escuela o unidad académica. | `-` |
+| `teachers` | `string[]` | **(Requerido)** Listado de nombres de los docentes o autores. | `-` |
+| `course` | `string` | Nombre del curso asociado (opcional). | `undefined` |
+| `year` | `string` | Año de publicación del recurso. | Año actual (auto-calculado). |
+| `audio` | `string` | Ruta al archivo de audio descriptivo. | `undefined` |
+| `addClass` | `string` | Clases CSS adicionales. | `undefined` |
+
+---
+
+## Estructura de Clases CSS
+
+- `.modal`: Define el ancho máximo (`50.375rem`) y el tamaño de fuente base para los créditos.
+- `.modal-credits__wrapper`: Maneja el espaciado interno (`u-flow`) y la alineación central del texto.
+- `.modal strong`: Resalta los nombres de los docentes con colores de marca que se ajustan al modo claro/oscuro.
+
+## Detalles de Funcionamiento
+
+- **Traducciones:** El componente gestiona automáticamente textos como el título "Créditos" y la leyenda de la licencia basándose en el idioma de `useOvaStore`.
+- **Adaptabilidad:** Los nombres de los docentes se renderizan mediante un subcomponente interno `Teacher` para asegurar uniformidad.
+- **Identidad:** Incluye de forma estática las menciones a la Vicerrectoría (VIMEP) y la Red de Gestión Tecnopedagógica de la UNAD.

@@ -3,6 +3,8 @@ title: Page Title
 description: Componente que muestra el título de la página actual, el indicador de progreso y las estrellas de gamificación.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `PageTitle` muestra el título de la página actual del OVA junto con el número de página, un indicador de progreso visual, el ícono del tipo de página y las estrellas de gamificación. Se actualiza automáticamente al navegar entre páginas y también puede actualizarse dinámicamente desde cualquier componente mediante un evento del DOM.
 
 ## Cómo implementarlo
@@ -102,3 +104,5 @@ aria-label="Progreso de la unidad"
 :::note[El título acepta HTML]
 El `title` del store puede contener etiquetas HTML como `<strong>` o `<em>` para formato visual. El componente lo renderiza con `dangerouslySetInnerHTML` en el h1 visible, y lo limpia automáticamente para el h1 de lectores de pantalla.
 :::
+
+<CoreRepoInfo corePath="components/layouts/page-title/page-title.tsx" />

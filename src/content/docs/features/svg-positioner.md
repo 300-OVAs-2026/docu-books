@@ -1,0 +1,86 @@
+---
+title: Posicionador sobre SVG (SvgPositioner)
+description: Sistema para posicionar elementos HTML de forma responsiva sobre una imagen SVG utilizando coordenadas de ViewBox.
+---
+
+El `SvgPositioner` es una herramienta potente que permite superponer componentes HTML (como botones, textos o actividades) sobre una imagen SVG, manteniendo la proporción y posición exacta independientemente del tamaño de la pantalla.
+
+## Características Principales
+
+- **Referencia por ViewBox:** Utiliza los valores de `viewBox` del SVG para calcular las coordenadas porcentuales automáticamente.
+- **Responsividad Total:** Al basarse en porcentajes derivados de la relación de aspecto del SVG, los elementos hijos siempre se mantienen en su lugar.
+- **Context API:** El contenedor detecta las dimensiones del SVG hijo y las provee a todos los sub-elementos.
+- **Flexibilidad de Contenido:** Permite inyectar cualquier tipo de elemento HTML sobre áreas específicas del dibujo SVG.
+
+## Cómo implementar
+
+El sistema consta de dos componentes: el contenedor `SvgPositioner` (que debe envolver al SVG) y los elementos hijos `SvgElement`.
+
+### Ejemplo básico
+
+```tsx
+import { SvgPositioner, SvgElement } from '@features/svg-positioner';
+
+const MyMap = () => {
+  return (
+    <SvgPositioner maxWidth="800px">
+      {/* El SVG debe ir primero para que el contenedor detecte el viewBox */}
+      <svg viewBox="0 0 1000 500">
+        <rect width="1000" height="500" fill="#eee" />
+        {/* Tu arte SVG aquí */}
+      </svg>
+
+      {/* Elemento posicionado en las coordenadas del SVG */}
+      <SvgElement 
+        top={100} 
+        left={150} 
+        width={200} 
+        height={50}
+      >
+        <button>Click en el mapa</button>
+      </SvgElement>
+    </SvgPositioner>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `SvgPositioner` (Contenedor)
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `maxWidth` | `string` | Ancho máximo del contenedor (ej: '600px', '100%'). | `'62.5rem'` |
+| `addClass` | `string` | Clase CSS adicional para el contenedor. | `''` |
+| `children` | `ReactNode` | Debe incluir el `<svg>` y los `<SvgElement>`. | - |
+
+### `SvgElement` (Hijo posicionado)
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `top` | `number` | **(Requerido)** Posición Y basada en el ViewBox del SVG. | - |
+| `left` | `number` | **(Requerido)** Posición X basada en el ViewBox del SVG. | - |
+| `width` | `number` | **(Requerido)** Ancho basado en el ViewBox del SVG. | - |
+| `height` | `number` | **(Requerido)** Alto basado en el ViewBox del SVG. | - |
+| `type` | `string` | El tag HTML a renderizar para este elemento. | `'div'` |
+| `addClass` | `string` | Clase CSS adicional. | `''` |
+
+---
+
+## Funcionamiento Interno
+
+1.  **Detección:** Al montarse, `SvgPositioner` busca el primer elemento `<svg>` hijo y extrae su `viewBox`.
+2.  **Cálculo:** `SvgElement` consume estas dimensiones via Contexto y realiza la operación: `(valor / dimension_svg) * 100`.
+3.  **Estilos:** Los resultados se inyectan como variables CSS (`--svg-element-x-position`, etc.) que el archivo `.module.css` utiliza para el posicionamiento absoluto.
+
+## Estructura de Clases CSS
+
+- `.container`: Contenedor relativo que centra el contenido y limita el ancho máximo.
+- `.element`: Elemento con `position: absolute` que incluye un sistema de scroll interno si el contenido desborda el área definida.
+
+## Consideraciones de Accesibilidad
+
+- Al usar `type`, puedes definir tags semánticos como `section` o `article` para los elementos superpuestos.
+- Los elementos hijos conservan su comportamiento natural de foco y lectura por lectores de pantalla.

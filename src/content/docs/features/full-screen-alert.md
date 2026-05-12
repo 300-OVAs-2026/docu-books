@@ -1,0 +1,54 @@
+---
+title: Full Screen Alert
+description: Componente para advertir o sugerir el uso de pantalla completa al usuario.
+---
+
+El componente `FullScreenAlert` muestra un mensaje de advertencia o sugerencia de usabilidad cuando el dispositivo (usualmente tabletas o teléfonos en orientación vertical) tiene una pantalla pequeña. Su propósito principal es recomendar al usuario girar la pantalla o habilitar la vista completa ("Full Screen") para interactuar de forma adecuada con elementos que requieren mayor espacio (como interactividades, cómics o juegos).
+
+## Cómo implementar
+
+Normalmente se inyecta acompañando a interactividades o contenedores de elementos gráficos que podrían recortarse o verse mal si la pantalla es muy estrecha o está en formato vertical.
+
+### Ejemplo básico
+
+```tsx
+import { FullScreenAlert } from '@features';
+
+const GameSection = () => {
+  return (
+    <>
+      <FullScreenAlert />
+      <div className="game-canvas">
+        {/* Lógica del juego o interactividad que necesita espacio */}
+      </div>
+    </>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `FullScreenAlert`
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `addClass` | `string` | Clases CSS adicionales para inyectar al contenedor de la alerta. | `undefined` |
+
+_La etiqueta de texto que se renderiza usa el idioma administrado a través de `useOvaStore` (Traducción automática)._
+
+---
+
+## Estructura de Clases CSS
+
+El componente utiliza módulos CSS e inyecta reglas específicas mediante Media Queries:
+
+- `.alert`: Componente Grid que alínea ícono y texto. Establece colores mediante variables css (`--clr-bg` y `--clr-text`).
+- Utiliza `@media screen and (max-width: 1280px) and (orientation: portrait)`: Para mostrar este contenedor únicamente cuando el dispositivo está en formato vertical y tiene un ancho inferior a 1280px, pues por defecto la alerta trae la propiedad `display: none;`.
+
+## Accesibilidad
+
+- Contiene `role="alert"` lo cual es vital para que las herramientas de lectura capten el mensaje.
+- Agrega `aria-live="assertive"` lo que fuerza a lectores de pantalla a anunciar de inmediato el contenido de la alerta en caso de montarse condicionalmente.
+- Posee `aria-atomic="true"` garantizando que se anuncie todo el contenido de la alerta en conjunto.

@@ -1,0 +1,56 @@
+---
+title: Full Screen Button
+description: Componente para añadir un botón que expanda un elemento al tamaño de la pantalla (Full Screen mode).
+---
+
+El componente `FullScreenButton` provee una interfaz gráfica lista para gestionar la entrada y salida del modo "Pantalla Completa" vía el hook `useFullScreen`. Evalúa y deshabilita si el modo estricto de _Full Screen_ no es soportado por el navegador actual del usuario.
+
+## Cómo implementar
+
+Puedes asociarlo a cualquier sección de tu página que necesite maximizarse pasando el `ID` de dicho contenedor a través de su prop principal (`elementId`).
+
+### Ejemplo básico
+
+```tsx
+import { FullScreenButton } from '@features';
+
+const VideoPlayerSection = () => {
+  return (
+    <div id="video-container" style={{ position: 'relative' }}>
+      <video src="mi-video.mp4" controls></video>
+
+      {/* Botón absoluto para pantalla completa */}
+      <FullScreenButton 
+        elementId="video-container" 
+        addClass="btn-absolute-corner" 
+      />
+    </div>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `FullScreenButton`
+
+El componente extiende propiedades base del componente `<Button />` tipado desde `books-ui`.
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `elementId` | `string` | **(Requerido)** El atributo `id` del nodo HTML que deseas elevar a Pantalla Completa. | `-` |
+| `label` | `string` | Texto del *Tooltip* descriptivo cuando se pasa por encima. | Traducciones `i18n` autogestionadas. |
+| `controlFullScreen` | `boolean` | Alternar a modo _Full Screen_ programáticamente cuando este booleano se vuelva verdadero. | `undefined` |
+| `onClick` | `function` | Función `callback` al hacer click sobre el botón. | `undefined` |
+| `addClass` | `string` | Clases de estilo auxiliares. | `undefined` |
+
+---
+
+## Estructura de Clases CSS
+
+El componente utiliza módulos CSS para asegurar el encapsulamiento de estilos e inyecta Media Queries para adaptabilidad:
+
+- `.button`: Deshabilita el botón por defecto (`display: none;`) mediante estilos en resoluciones super grandes.
+- Utiliza `@media screen and (max-width: 1280px)`: Para sobreescribir `.button` a `display: block;` limitando el renderizado de la UI de *Full Screen* a resoluciones menores o tabletas donde el layout original pudiese no estar 100% visible.
+- `.tooltip`: Estilos visuales inyectados en la envoltura superior `<Tooltip>` proveniente de `books-ui` que colorea el contenedor oscuro nativo.

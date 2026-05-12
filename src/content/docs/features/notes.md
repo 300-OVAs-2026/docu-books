@@ -1,0 +1,75 @@
+---
+title: Notas Flotantes (Notes)
+description: Sistema integral de toma de apuntes, edición de texto enriquecido y captura de selecciones.
+---
+
+El sistema de `Notes` es una funcionalidad avanzada que permite a los usuarios tomar apuntes directamente sobre el contenido del OVA. Incluye un panel flotante persistente, un editor de texto enriquecido y una herramienta de captura de texto inteligente.
+
+## Características Principales
+
+- **Persistencia Local:** Las notas se guardan automáticamente en el `localStorage` mediante un store dedicado (`useNotesStore`), permitiendo que el usuario recupere sus apuntes en sesiones futuras.
+- **Captura de Selección:** Al seleccionar cualquier texto en el OVA con el mouse, aparece un *tooltip* contextual ("Capturar nota") que envía automáticamente el fragmento seleccionado al editor de notas.
+- **Editor Enriquecido:** Utiliza la librería **Tiptap** para ofrecer herramientas de formato (Negrita, Cursiva, Listas, Títulos, Alineación).
+- **Panel Draggable:** El panel de notas se puede arrastrar por toda la pantalla para no obstruir la lectura.
+- **Contextualidad:** El sistema identifica en qué página se creó la nota, permitiendo organizar apuntes por secciones o verlos todos en una lista global.
+- **Exportación:** Permite descargar las notas del usuario en formato **PDF**.
+
+## Cómo implementar
+
+El componente suele instanciarse en la raíz del OVA o en el layout principal para que esté disponible en todo momento.
+
+### Ejemplo básico
+
+```tsx
+import { FloatingNotes } from '@features/notes';
+
+const App = () => {
+  return (
+    <>
+      <main>
+        {/* Contenido del OVA */}
+      </main>
+      
+      {/* El componente maneja internamente su estado flotante y persistencia */}
+      <FloatingNotes currentPage="/modulo-1/introduccion" />
+    </>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `FloatingNotes`
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `currentPage` | `string` | **(Requerido)** El identificador o path de la página actual para categorizar las notas. | `'/'` |
+
+---
+
+## Arquitectura del Sistema
+
+El módulo de notas es complejo y se divide en varios sub-sistemas:
+
+1.  **useNotesStore:** Gestión de estado con Zustand y middleware de persistencia.
+2.  **RichTextEditor:** Capa de edición basada en Tiptap con extensiones de estilo.
+3.  **useTextSelection:** Hook encargado de detectar rangos de texto seleccionados y disparar el tooltip de captura.
+4.  **FloatingPanel:** Lógica de minimizado, maximizado y posicionamiento `fixed`.
+
+---
+
+## Estructura de Clases CSS
+
+- `.fn-notes-container`: Contenedor raíz con posicionamiento inicial (fijo en la esquina inferior izquierda en móviles e inferior derecha en escritorio).
+- `.fn-floating-trigger`: Botón estilo "burbuja" que abre el panel. Incluye un *badge* (`.fn-notes-badge`) que indica el número de notas.
+- `.fn-editor-content`: Estilos específicos para el área editable del editor Tiptap.
+- `.fn-selection-tooltip`: Estilo para el pequeño botón que flota sobre la selección de texto del usuario.
+
+## Accesibilidad
+
+- **Focus Trap:** Al abrir el panel de notas, el foco del teclado queda capturado dentro del modal para evitar que el usuario se pierda al usar `Tab`.
+- **Navegación Teclado:** Soporte para cerrar mediante la tecla `Esc`.
+- **Aria Attributes:** Uso de `aria-label` en todas las herramientas del editor y estados del panel (minimizado/abierto).
+- **Focus Restoration:** Al cerrar las notas, el foco vuelve automáticamente al botón que las activó.

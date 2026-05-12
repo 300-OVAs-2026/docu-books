@@ -1,0 +1,81 @@
+---
+title: Avatar y ChoiceAvatar
+description: Componentes para el manejo y selección de avatares que acompañan el contenido en pantalla.
+---
+
+Este módulo proporciona dos funcionalidades integradas: `Avatar`, para renderizar la imagen del avatar seleccionado actualmente a lo largo del material, y `ChoiceAvatar`, un panel interactivo que le permite al usuario elegir qué avatar lo acompañará. El estado global se gestiona a través de `useOvaStore`.
+
+## Cómo implementar
+
+El componente `Avatar` lo puedes usar en cualquier parte del contenido donde quieras mostrar el guía virtual en diferentes poses. El `ChoiceAvatar` sirve como una pantalla de inicio donde el usuario configura sus preferencias.
+
+### Ejemplo básico de ChoiceAvatar
+
+```tsx
+import { ChoiceAvatar } from '@features';
+
+// Normalmente se instancia al comienzo del OVA para que el usuario elija su guía.
+const InitialScreen = () => {
+  return (
+    <ChoiceAvatar />
+  );
+};
+```
+
+### Ejemplo básico de Avatar
+
+```tsx
+import { Avatar } from '@features';
+import { AvatarVariation } from '@features/types/type';
+
+const SectionConclusion = () => {
+  return (
+    <div>
+      <p>¡Felicidades, lograste completar la misión!</p>
+      {/* Muestra al avatar previamente seleccionado en la pose de "saludando" */}
+      <Avatar variation={AvatarVariation.GREETING} title="Avatar despidiéndose" />
+    </div>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `Avatar`
+
+Este componente extiende los atributos nativos de un `<img>` estándar de HTML.
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `variation` | `AvatarVariation` | **(Requerido)** El estado/pose del avatar (e.g. `saludando`, `pensando`, `presentando`). | `-` |
+| `title` | `string` | Título accesible para la imagen del avatar. | `''` |
+| `size` | `string` | Tamaño para renderizar la imagen base. | `'26.875rem'` |
+| `noCaption` | `boolean` | Oculta la leyenda del origen de la imagen. | `undefined` |
+
+### `ChoiceAvatar`
+
+No recibe propiedades directas (`Props`), pues todo su estado es manejado de manera interna consultando `useOvaStore` y dibujando múltiples secciones en paneles paginados (`AVATARS_PER_SECTION = 6`). 
+
+---
+
+## Estados / Variaciones disponibles (`AvatarVariation`)
+
+- `PRESENTING` ("presentando")
+- `PRESENTING_RIGHT` ("presentando-derecha")
+- `PRESENTING_LEFT` ("presentando-izquierda")
+- `THINKING` ("pensando")
+- `CONCLUSIONS` ("conclusiones")
+- `GREETING` ("saludando")
+
+---
+
+## Estructura de Clases CSS
+
+El componente de selección interactiva utiliza módulos CSS para asegurar el encapsulamiento de estilos:
+
+- `.instruction`: Título o instrucción centrada.
+- `.panel` y `.panel__content`: Envuelve la retícula de tarjetas de elección y los botones de paginado lateral.
+- `.avatar-list` y `.avatar-item`: Grilla y tarjetas individuales para renderizar un avatar como opción elegible.
+- `.panel__navigation-button`: Los botones flotantes `Anterior` y `Siguiente` que usan los íconos tipo Chevron.

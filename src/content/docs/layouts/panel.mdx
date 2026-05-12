@@ -3,6 +3,8 @@ title: Panel
 description: Layout de varias secciones con navegación por pestañas y barra de progreso. Ideal para OVAs con múltiples temas en una misma página.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Panel` es un layout de múltiples secciones con navegación por pestañas y barra de progreso. Permite dividir el contenido de una página en secciones independientes que el estudiante navega con botones anterior/siguiente o haciendo clic directamente en el indicador de progreso. Gestiona automáticamente el intérprete de lengua de señas y el título de cada sección. Se compone de dos subcomponentes: `Panel.Section` y `Panel.Button`.
 
 ## Cómo implementarlo
@@ -154,3 +156,5 @@ Cuando el estudiante navega entre secciones, `PanelProgress` pausa todos los vid
 - **`PanelProgress`** — barra de navegación con botones anterior/siguiente e indicadores numéricos. Se renderiza automáticamente — no necesitas agregarlo
 - **`PageTitle`** — se renderiza dentro del `Panel` con `stars`. Al cambiar de sección, dispara `OVATITLEUPDATE` para actualizar el título visible
 - **Intérprete sincronizado** — cada `Panel.Section` registra su `uid` y sus videos en el contexto. Al navegar, `PanelProgress` llama a `updateVideoSources` con los videos de la sección activa
+
+<CoreRepoInfo corePath="components/layouts/panel/panel.tsx" />

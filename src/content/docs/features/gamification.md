@@ -1,0 +1,87 @@
+---
+title: Gamification
+description: Sistema de recompensas, estrellas y medallas para actividades y juegos.
+---
+
+El ecosistema de `Gamification` permite incentivar al usuario mediante un sistema de estrellas y medallas basado en su desempeño en las actividades. Se gestiona principalmente a través del hook `useGamification`, que conecta el estado visual con el almacenamiento global (`useGamificationStore`).
+
+## Funcionamiento General
+
+El sistema permite:
+1.  **Persistencia:** Las estrellas obtenidas se guardan en el `localStorage`.
+2.  **Penalización:** El desarrollador puede descontar estrellas ante errores o intentos (reintentos).
+3.  **Feedback:** Al completar una actividad, se dispara un modal automático que muestra el resumen, estrellas y una medalla ganada.
+
+## Cómo implementar
+
+Para implementar la gamificación en una actividad o juego, se debe utilizar el hook `useGamification`. Este hook devuelve componentes listos para usar y funciones de control.
+
+### Ejemplo en una Actividad (Selects/Radio/Checks)
+
+```tsx
+import { useGamification } from '@features/gamification';
+import { Button } from '@ui';
+
+const MyActivity = () => {
+  // id: identificador único de la actividad
+  // total: cantidad de aciertos necesarios para completar
+  const { reportResult, notifyReset, Stars, Modal } = useGamification({ 
+    id: 'act-identificadora', 
+    total: 3 
+  });
+
+  return (
+    <>
+      <Stars /> {/* Renderiza las estrellas actuales en la esquina superior */}
+      
+      <div className="activity-container">
+        {/* Supongamos una función que valida el acierto de la lógica */}
+        <button onClick={() => reportResult(true)}>Acierto</button>
+        
+        {/* Botón de reintento: descuenta una estrella */}
+        <Button label="REINTENTAR" variant="reset" onClick={notifyReset} />
+      </div>
+
+      {/* Modal de éxito al finalizar */}
+      <Modal audio="assets/audios/completado.mp3" />
+    </>
+  );
+};
+```
+
+---
+
+## Parámetros del Hook `useGamification`
+
+| Parámetro | Tipo | Descripción | Default |
+|---|---|---|---|
+| `id` | `string` | **(Requerido)** Identificador único de la actividad para persistencia. | `-` |
+| `total` | `number` | Número de aciertos exitosos necesarios para abrir el `Modal`. | `1` |
+| `maxStars` | `number` | Cantidad de estrellas iniciales. | `3` |
+| `onRestart` | `() => void` | Callback opcional que se ejecuta al darle al botón "Reiniciar" del modal. | `undefined` |
+
+---
+
+## Retorno del Hook (Componentes y Funciones)
+
+| Propiedad | Tipo | Descripción |
+|---|---|---|
+| `Stars` | `JSX.Element` | Componente pre-estilizado que muestra el conteo de estrellas (e.g. `★ ★ ☆`). |
+| `Modal` | `React.FC` | Componente de diálogo que aparece al completar la actividad. Recibe `audio` e `interpreter` (video) opcionales. |
+| `reportResult` | `(res) => void` | Registra un éxito. Puede recibir un `boolean` simple o un objeto `{ success, correct, total }`. |
+| `notifyReset` | `() => void` | Debe llamarse al reiniciar la actividad manualmente; descuenta una estrella de la persistencia. |
+| `stars` | `number` | El número actual de estrellas (valor numérico). |
+| `completed` | `boolean` | Indica si la actividad ya fue finalizada anteriormente. |
+
+---
+
+## Estructura de Clases CSS
+
+El componente utiliza módulos CSS para el manejo de los estados visuales de los premios:
+
+- `.stars__wrapper`: Alinea el contenedor de estrellas a la derecha por defecto.
+- `.stars`: Contenedor tipo píldora oscura de las estrellas.
+- `.star`: Define el estilo del carácter de estrella. Usa `data-filled="true"` para cambiar el color a dorado (`--accent`).
+- `.modal__medal`: Contenedor circular que muestra el ícono de trofeo (`award`).
+- `.modal__score`: Estilos destacados para el marcador numérico (Ej: **4** / 5).
+- `.modal__medal-text`: Estilo de etiqueta redondeada para el nombre de la medalla obtenida.

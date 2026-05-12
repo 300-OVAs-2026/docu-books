@@ -1,0 +1,53 @@
+---
+title: Download Link
+description: Componente para renderizar enlaces optimizados para la descarga de archivos.
+---
+
+El componente `DownloadLink` proporciona un enlace (`<a>`) con el atributo nativo `download`, estilizado como un botón interactivo. Es útil para ofrecer recursos adicionales, PDFs, o archivos multimedia listos para ser guardados en el dispositivo del usuario.
+
+## Cómo implementar
+
+Se puede integrar en cualquier parte donde requieras ofrecer material descargable.
+
+### Ejemplo básico
+
+```tsx
+import { DownloadLink } from '@features';
+
+const SectionResources = () => {
+  return (
+    <div>
+      <p>Puedes descargar el extracto de esta sesión en formato PDF:</p>
+      <DownloadLink 
+        label="Descargar resumen"
+        fileUrl="assets/documents/resumen-sesion-1.pdf"
+      />
+    </div>
+  );
+};
+```
+
+---
+
+## Parámetros
+
+### `DownloadLink`
+
+| Prop | Tipo | Descripción | Default |
+|---|---|---|---|
+| `fileUrl` | `string` | **(Requerido)** La ruta o URL del archivo que se desea descargar. | `-` |
+| `label` | `string` | **(Requerido)** El texto visible que acompañará al botón. | `-` |
+| `fileName` | `string` | Nombre bajo el cual se guardará el archivo en el equipo. | Se autocalcula tomando el nombre final de la ruta recibida. |
+| `iconName` | `string` | Nombre del icono a mostrar (utiliza el componente `Icon`). | `'arrow-right-button'` |
+| `addClass` | `string` | Clases CSS auxiliares a inyectar en la etiqueta. | `undefined` |
+| `ariaLabel` | `string` | Etiqueta accesible para lectores de pantalla. | ``Descargar ${label}`` |
+
+---
+
+## Estructura de Clases CSS
+
+El componente utiliza módulos CSS asegurando sus propios estilos en los diferentes temas y estados interactivos:
+
+- `.downloadLink`: Clase principal aplicada a la etiqueta `<a>`. Declara su comportamiento _inline-flex_, un límite de anchura con `fit-content` y los colores base del botón.
+- Pseudo-clase `:is(:hover, :focus)`: Define el _feedback_ interactivo con un cambio de color suave en el hover o el focus en la navegación de teclado.
+- Selector de Dark Mode (`html[data-dark-mode="true"]`): Aplica un ajuste de contraste para el fondo y tipo de texto.

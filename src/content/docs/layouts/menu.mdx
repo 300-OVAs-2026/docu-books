@@ -3,6 +3,8 @@ title: Menu
 description: Componente de navegación principal del OVA. Incluye el botón hamburguesa, controles de audio, intérprete, medallas y el panel de navegación completo.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Menu` es el componente de navegación principal que vive dentro del `Header`. Gestiona la apertura y cierre del panel de navegación, los controles de audio descriptivo, el botón del intérprete de lengua de señas y el contador de medallas. Se compone de dos subcomponentes internos: el propio `Menu` y `MenuButtonInterpreter`.
 
 ## Cómo implementarlo
@@ -134,3 +136,5 @@ const MiComponente = () => {
 ```
 
 > `handleExpanded(MenuOptions.RESET)` cierra todos los paneles a la vez.
+
+<CoreRepoInfo corePath="components/layouts/menu/menu.tsx" />

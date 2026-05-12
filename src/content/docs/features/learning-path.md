@@ -1,0 +1,66 @@
+---
+title: Learning Path
+description: Mapa interactivo que visualiza el progreso del usuario a través de las páginas del OVA.
+---
+
+El componente `LearningPath` es una interfaz de navegación visual (estilo "camino de aprendizaje") que muestra el listado de páginas disponibles en el material. Bloquea el acceso a secciones futuras basándose en si la página anterior ha sido visitada, utilizando el estado global de `useOvaStore`.
+
+## Características Principales
+- **Navegación Dinámica:** Genera automáticamente nodos de navegación basados en el arreglo de `pages` del store.
+- **Sistema de Bloqueo:** Impide que el usuario salte a páginas que aún no le corresponden (mecanismo de secuencialidad).
+- **Diseño Responsivo con SVGs:** Utiliza puentes o líneas conectoras (`BridgeSvg`) que se adaptan automáticamente a vistas de Escritorio, Tableta y Móvil mediante lógica geométrica calculada.
+- **Iconografía Contextual:** Los nodos cambian su ícono y color según el tipo de página (`kind`) contenido en la configuración (Inicio, Contenido, Juego, Actividad, Final, etc.).
+
+## Cómo implementar
+
+Normalmente se utiliza como una página de "Mapa" o "Contenido" al inicio del OVA o como una sección de navegación principal.
+
+### Ejemplo básico
+
+```tsx
+import { LearningPath } from '@features';
+
+// Solo es necesario instanciarlo; consume automáticamente useOvaStore.
+const MapPage = () => {
+  return (
+    <LearningPath />
+  );
+};
+```
+
+---
+
+## Lógica de los Nodos (`PageNode`)
+
+Cada círculo en el mapa representa una página y puede estar en dos estados:
+
+1.  **Habilitado:** El usuario puede hacer clic para navegar. Muestra un tooltip con el título y un ícono representativo.
+2.  **Bloqueado:** Muestra un ícono de candado (`Lock`) y una opacidad reducida. El usuario no puede interactuar hasta visitar la página previa.
+
+---
+
+## Parámetros
+
+El componente principal `LearningPath` no recibe propiedades, ya que su lógica es puramente reactiva a la `OvaStore`.
+
+Los sub-componentes internos son:
+- `PageNode`: Gestiona el enlace, el tooltip y el estado bloqueado de cada página.
+- `BridgeSvg`: Dibuja las líneas de conexión dinámicas entre los nodos.
+
+---
+
+## Estructura de Clases CSS
+
+- `.learning-path`: Contenedor grid que separa el avatar del mapa.
+- `.learning-path__map`: Contenedor del mapa con posicionamiento relativo para las capas SVG.
+- `.learning-path__list`: Grilla (`grid-template-columns`) que posiciona los nodos en filas y columnas.
+- `.learning-path__item`: Contenedor individual de cada nodo. Usa variables `--pos-row` y `--pos-col` calculadas dinámicamente.
+- `.learning-path__bridge`: Capa absoluta que contiene los SVGs de las líneas pre-renderizadas.
+- `[data-kind="..."]`: Selectores de atributo que aplican esquemas de color específicos para nodos de tipo `start`, `finish`, `game`, etc.
+
+## Accesibilidad
+
+- Contiene un `aria-label="Mapa de aprendizaje"` en el bloque de navegación.
+- Los nodos bloqueados usan `role="img"` con una descripción de "bloqueado" para evitar confusión.
+- Los nodos activos usan `aria-current="page"` si el usuario se encuentra actualmente en esa ubicación.
+- Los íconos decorativos dentro de los nodos están marcados con `aria-hidden="true"`.
