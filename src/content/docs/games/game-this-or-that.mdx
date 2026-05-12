@@ -3,6 +3,8 @@ title: Juego de comparación
 description: Componente GameThisOrThat para crear preguntas interactivas de verdadero/falso o selección única con retroalimentación visual por niveles.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameThisOrThat` es el componente raíz para crear preguntas interactivas de selección única agrupadas en niveles. Gestiona el estado de validación, resultado y reset de todas las opciones. Se compone de tres subcomponentes: `GameThisOrThat.Level`, `GameThisOrThat.Radio` y `GameThisOrThat.Button`.
 
 ## Vista previa
@@ -192,6 +194,8 @@ Contenedor raíz. Gestiona el estado global de todas las opciones y niveles.
 | `onResult` | `({ result, options }) => void` | | Callback al comprobar. Recibe `result` (boolean) y el array de opciones seleccionadas |
 | `minSelected` | `number` | | Mínimo de opciones seleccionadas para habilitar el botón Comprobar. Por defecto `1` |
 
+<CoreRepoInfo corePath="components/games/game-this-or-that/game-this-or-that.tsx" />
+
 ---
 
 ### `GameThisOrThat.Level`
@@ -204,6 +208,8 @@ Agrupa la pregunta con sus opciones de respuesta. Puede haber múltiples niveles
 | `questionNumber` | `number` | | Número visible de la pregunta. Útil cuando hay múltiples niveles |
 | `backgroundImage` | `string` | | URL de la imagen de fondo del nivel. Si se omite usa el fondo por defecto |
 | `addClass` | `string` | | Clases utilitarias adicionales para el contenedor del nivel |
+
+<CoreRepoInfo corePath="components/games/game-this-or-that/game-this-or-that-level.tsx" />
 
 ---
 
@@ -220,6 +226,8 @@ Cada opción seleccionable dentro de un nivel.
 
 > Debe haber exactamente un `state="success"` por nivel.
 
+<CoreRepoInfo corePath="components/games/game-this-or-that/game-this-or-that-radio.tsx" />
+
 ---
 
 ### `GameThisOrThat.Button`
@@ -229,3 +237,5 @@ Botón de acción. Siempre debe ir dentro de `<GameThisOrThat>`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` deselecciona todas las opciones y reinicia el estado |
+
+<CoreRepoInfo corePath="components/games/game-this-or-that/game-this-or-that-button.tsx" />

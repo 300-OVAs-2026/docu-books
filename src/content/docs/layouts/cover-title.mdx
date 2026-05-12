@@ -3,6 +3,8 @@ title: Cover Title
 description: Componente de portada del OVA. Muestra el título, los audios de accesibilidad y el botón para entrar al contenido.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `CoverTitle` es el componente de portada de cada OVA. Muestra el título principal, conecta el intérprete de lengua de señas, aplica la imagen de fondo y renderiza un botón de navegación que lleva al estudiante al menú o a la selección de avatar según su estado.
 
 ## Cómo implementarlo
@@ -95,3 +97,5 @@ title="Fundamentos de<br/>Contabilidad"
 :::note[La imagen de fondo se aplica globalmente]
 `CoverTitle` no aplica el fondo solo al componente — usa `useBackground` para aplicarlo a toda la página. Cada vez que el componente se monta, el fondo cambia al `url` indicado.
 :::
+
+<CoreRepoInfo corePath="components/layouts/cover-title/cover-title.tsx" />

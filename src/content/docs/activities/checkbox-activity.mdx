@@ -3,6 +3,8 @@ title: Actividades con selección múltiple
 description: Componente Checkboxs para crear actividades con casillas de selección múltiple.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Checkboxs` es el componente raíz para crear preguntas o actividades de selección múltiple utilizando casillas de verificación (checkboxes). Gestiona de forma automática el estado de selección, la validación y los resultados de las respuestas marcadas. Se compone de dos subcomponentes: `Checkboxs.Checkbox` y `Checkboxs.Button`.
 
 ## Vista previa
@@ -144,6 +146,8 @@ Finalmente, fuera de tu layout principal coloca el Modal de gamificación y los 
 | `onResult` | `({ result: boolean, options: Option[] }) => void` | | Callback disparado al comprobar. |
 | `minSelected` | `number` | | Establece la cantidad mínima de opciones que deben seleccionarse para habilitar el botón "Comprobar". Si no se especifica, calculará temporalmente el total de casillas dividido sobre 2. |
 
+<CoreRepoInfo corePath="components/activities/checkbox-activity/checkbox-activity.tsx" />
+
 ## Props de Checkboxs.Checkbox
 
 | Prop | Tipo | Req. | Descripción |
@@ -154,8 +158,12 @@ Finalmente, fuera de tu layout principal coloca el Modal de gamificación y los 
 | `state` | `"success" \| "wrong"` | ✓ | Define si la opción seleccionada cuenta como correcta o incorrecta. Para ganar, el estudiante debe seleccionar únicamente las opciones indicadas como `"success"`. |
 | `addClass` | `string` | | Clases CSS adicionales para la casilla. |
 
+<CoreRepoInfo corePath="components/activities/checkbox-activity/checkbox-element.tsx" />
+
 ## Props de Checkboxs.Button
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como "Comprobar". Con `"reset"`, desmarca todas las casillas y reinicia el estado. |
+
+<CoreRepoInfo corePath="components/activities/checkbox-activity/checkbox-button.tsx" />

@@ -3,6 +3,8 @@ title: Actividades con selectores
 description: Componente Selects para crear ejercicios de relacionar conceptos mediante menús desplegables.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Selects` es el componente raíz para crear actividades de relacionar columnas mediante menús desplegables. Gestiona el estado de selección, validación y resultado de todas las respuestas. Se compone de dos subcomponentes: `Selects.Select` y `Selects.Button`.
 
 ## Vista previa
@@ -158,6 +160,8 @@ Contenedor raíz. Gestiona el estado de todos los selectores y dispara la valida
 |---|---|---|---|
 | `onResult` | `({ result: boolean }) => void` | ✓ | Callback al comprobar. Recibe `true` si todos los selectores tienen la respuesta correcta |
 
+<CoreRepoInfo corePath="components/activities/select-activity/select-activity.tsx" />
+
 ---
 
 ### `Selects.Select`
@@ -171,6 +175,8 @@ Menú desplegable individual. Cada uno representa una fila de la columna A.
 | `label` | `string` | ✓ | Etiqueta accesible del selector |
 | `name` | `string` | ✓ | Identificador único del selector. Debe ser distinto en cada fila |
 
+<CoreRepoInfo corePath="components/activities/select-activity/select-element.tsx" />
+
 ---
 
 ### `Selects.Button`
@@ -180,3 +186,5 @@ Botón de acción dentro del bloque. Siempre debe ir dentro de `<Selects>`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como Comprobar y dispara `onResult`. Con `"reset"` limpia todas las selecciones |
+
+<CoreRepoInfo corePath="components/activities/select-activity/select-button.tsx" />

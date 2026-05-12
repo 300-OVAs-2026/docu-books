@@ -3,6 +3,8 @@ title: Actividad Verdadero o Falso
 description: Actividad clásica para validar conocimientos mediante afirmaciones que el usuario clasifica como verdaderas o falsas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `TrueFalseActivity` permite a los estudiantes evaluar una serie de afirmaciones de manera individual. Gestiona el estado de selección, validación y resultado de todas las preguntas de la pantalla.
 
 ## Vista previa
@@ -130,6 +132,8 @@ const closeModal = () => setIsOpen(null);
 | `onResult` | `Function` | Callback que recibe `{ result, options }` al validar. |
 | `minSelected` | `number` | Mínimo de respuestas para habilitar el botón (Default: 1). |
 
+<CoreRepoInfo corePath="components/activities/true-false-activity/true-false-activity.tsx" />
+
 ### `TrueFalseActivity.Option`
 
 | Prop | Tipo | Descripción |
@@ -138,3 +142,5 @@ const closeModal = () => setIsOpen(null);
 | `name` | `string` | Nombre del grupo (pregunta). |
 | `label` | `string` | La afirmación a evaluar. |
 | `correct` | `boolean` | Valor correcto de la afirmación. |
+
+<CoreRepoInfo corePath="components/activities/true-false-activity/true-false-option.tsx" />

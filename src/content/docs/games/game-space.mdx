@@ -3,6 +3,8 @@ title: Juego espacial
 description: Componente GameSpace para crear actividades interactivas de selección múltiple con temática espacial animada.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameSpace` es el componente raíz para crear preguntas de selección múltiple ambientadas en un universo espacial animado. El estudiante elige la respuesta correcta entre varias opciones mientras navega por una galaxia. Gestiona el estado de selección, validación y resultado. Se compone de tres subcomponentes: `GameSpace.Galaxy`, `GameSpace.Radio` y `GameSpace.Button`.
 
 ## Vista previa
@@ -183,6 +185,8 @@ Contenedor raíz. Gestiona el estado global de selección y validación.
 | `onResult` | `({ result, options }) => void` | | Callback al comprobar. Recibe `result` (boolean) y el array de opciones seleccionadas |
 | `minSelected` | `number` | | Mínimo de opciones seleccionadas para habilitar Comprobar. Por defecto `1` |
 
+<CoreRepoInfo corePath="components/games/game-space/game-space.tsx" />
+
 ---
 
 ### `GameSpace.Galaxy`
@@ -194,6 +198,8 @@ Contenedor de la pregunta y sus opciones. Define el fondo visual del universo.
 | `question` | `string \| JSX.Element` | ✓ | Texto de la pregunta. Acepta JSX para texto enriquecido |
 | `universeType` | `"1" \| "2"` | | Variación visual del fondo espacial. Por defecto `2` |
 | `addClass` | `string` | | Clases utilitarias adicionales para el contenedor |
+
+<CoreRepoInfo corePath="components/games/game-space/game-space-galaxy.tsx" />
 
 ---
 
@@ -212,6 +218,8 @@ Cada opción de respuesta dentro de una galaxia.
 
 > Debe haber exactamente un `state="success"` por galaxia.
 
+<CoreRepoInfo corePath="components/games/game-space/game-space-radio.tsx" />
+
 ---
 
 ### `GameSpace.Button`
@@ -221,3 +229,5 @@ Botón de acción. Siempre debe ir dentro de `<GameSpace>`, fuera de `Galaxy`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-space/game-space-button.tsx" />

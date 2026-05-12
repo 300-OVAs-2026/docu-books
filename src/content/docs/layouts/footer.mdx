@@ -3,6 +3,8 @@ title: Footer
 description: Componente de pie de página del OVA. Muestra el botón de navegación al menú principal.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Footer` es el componente de pie de página que aparece en todas las páginas del OVA. Renderiza un botón animado con ícono SVG que lleva al estudiante al menú principal del OVA. Se adapta automáticamente al idioma configurado en el store.
 
 ## Cómo implementarlo
@@ -33,3 +35,5 @@ const OvaTemplatep01 = () => {
 :::note[No necesita props]
 `Footer` lee todo lo que necesita directamente del store. Solo impórtalo y úsalo — no hay nada que configurar.
 :::
+
+<CoreRepoInfo corePath="components/layouts/footer/footer.tsx" />

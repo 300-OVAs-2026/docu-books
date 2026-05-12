@@ -3,6 +3,8 @@ title: Medals
 description: Página de medallas y progreso del OVA. Muestra el historial de actividades completadas, estrellas obtenidas y medallas ganadas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Medals` es la página de progreso del estudiante. Muestra una tabla con todas las actividades del OVA, indicando cuáles fueron completadas, cuántas estrellas se obtuvieron y si se ganó la medalla. El contador de actividades completadas y las estrellas totales se calculan automáticamente desde el store de gamificación.
 
 ## Cómo implementarlo
@@ -68,3 +70,5 @@ Completadas: 2/5      ⭐ Estrellas totales: 6
 :::tip[Las actividades se registran automáticamente]
 No necesitas hacer nada especial para que una actividad aparezca en la página de medallas. Cada vez que el estudiante completa una actividad y se llama `reportResult` desde el hook `useGamification`, el store de gamificación se actualiza y la tabla refleja el progreso automáticamente.
 :::
+
+<CoreRepoInfo corePath="components/layouts/medals/medals.tsx" />

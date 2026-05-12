@@ -3,6 +3,8 @@ title: Layout
 description: Componente de estructura principal del OVA. Envuelve cada página con el header, footer, intérprete, notas flotantes y la barra de desarrollo.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Layout` es el esqueleto estructural que envuelve todas las páginas del OVA. Se encarga de montar el `Header`, el `Footer`, el `Interpreter`, las `FloatingNotes` y la `DevToolbar`, además de actualizar el título del documento según la página actual y respetar las preferencias de accesibilidad del usuario para animaciones.
 
 ## Cómo implementarlo
@@ -86,3 +88,5 @@ const OvaPage01 = () => (
 );
 ```
 :::
+
+<CoreRepoInfo corePath="components/layouts/layout/layout.tsx" />

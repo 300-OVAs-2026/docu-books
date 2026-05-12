@@ -3,6 +3,8 @@ title: Help
 description: Página de ayuda del OVA. Muestra las especificaciones técnicas, un tip de navegación y un tour guiado por la interfaz.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Help` es la página de ayuda que el estudiante puede abrir desde el menú del OVA. Muestra las especificaciones técnicas recomendadas (navegadores, hardware, requisitos), un consejo de navegación y un botón para iniciar el tour guiado por la interfaz. Todo el contenido se adapta automáticamente al idioma configurado en el store.
 
 ## Cómo implementarlo
@@ -85,3 +87,5 @@ El tour usa clases con prefijo `js-` para ubicar cada elemento en el DOM. Si ren
 - **Avatar** — renderiza el avatar del OVA con la variación `GREETING` a la izquierda del contenido
 - **Tour** — usa el componente `Tour` de `books-ui`. `HelpTour` controla el estado `openTour` con `useState` y lo pasa al `Tour` como `isOpen`
 - **`Content withOutTitle`** — usa el layout `Content` con `withOutTitle` porque la página de ayuda tiene su propio encabezado personalizado y no necesita el título automático de la página
+
+<CoreRepoInfo corePath="components/layouts/help/help.tsx" />

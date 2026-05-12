@@ -3,6 +3,8 @@ title: Selección por grupos
 description: Componente SelectGroup para crear actividades interactivas de múltiple selección agrupada mediante listas desplegables.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `SelectGroup` es el componente diseñado para manejar grupos anidados de listas desplegables u opciones conjuntas. Permite estructurar la información en modo agrupación (por filas, cards, contextos varios), evaluando su estado de manera combinada bajo un mismo bloque e integrándose naturalmente con las políticas de validación interactiva de todo el OVA. Se basa en proporcionar un contexto global centralizado para orquestar la sincronización entre subcomponentes hijos (`SelectGroup.Select` y `SelectGroup.Button`).
 
 ## Vista previa
@@ -185,6 +187,8 @@ Puesto que es una actividad basada en agrupación de listas (o select lists inte
 |---|---|---|---|
 | `onResult` | `({ result: boolean, options: Option[] }) => void` | | Función callback disparada bajo mandato del botón de comprobación. |
 
+<CoreRepoInfo corePath="components/activities/select-group-activity/select-group-activity.tsx" />
+
 ## Props de SelectGroup.Select
 
 Elemento subyacente para mostrar menús desplegables pero sumado de forma compartida al estado general principal (`SelectGroup`).
@@ -198,8 +202,12 @@ Elemento subyacente para mostrar menús desplegables pero sumado de forma compar
 | `placeholder` | `string` | | Etiqueta previa en estado vacío. |
 | `addClass` | `string` | | Clases css utilitarias o personalizadas adicionales. |
 
+<CoreRepoInfo corePath="components/activities/select-group-activity/select-group-element.tsx" />
+
 ## Props de SelectGroup.Button
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Dejar sin valor evalúa la respuesta general dada por el estudiante y bloquea las entradas tras pulsarlo ("Comprobar"). Si posee `"reset"`, despoblará todas las entradas restaurándolas e inicializando de cero el estado de comprobación interno. |
+
+<CoreRepoInfo corePath="components/activities/select-group-activity/select-group-button.tsx" />

@@ -3,6 +3,8 @@ title: Actividad Emparejamiento Lógico
 description: Actividad interactiva para relacionar conceptos visuales con descripciones textuales mediante una lógica de selección y validación.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `PairLogicActivity` permite conectar imágenes con bloques de texto. Es ideal para relacionar procesos, identificar elementos visuales o asociar conceptos con sus representaciones gráficas.
 
 ## Vista previa
@@ -146,6 +148,8 @@ const closeModal = () => setIsOpen(null);
 | `alt` | `string` | Texto descriptivo para accesibilidad. |
 | `join` | `string` | ID único que vincula la imagen con su texto. |
 
+<CoreRepoInfo corePath="components/activities/pair-logic-activity/pair-logic-image.tsx" />
+
 ### `PairLogicActivity.Items`
 
 | Prop | Tipo | Descripción |
@@ -153,4 +157,6 @@ const closeModal = () => setIsOpen(null);
 | `text` | `string` | Texto que describe el concepto. |
 | `join` | `string` | ID único que vincula el texto con su imagen. |
 | `imageAlt` | `string` | (Opcional) Alt de la imagen para reporte vocal. |
+
+<CoreRepoInfo corePath="components/activities/pair-logic-activity/pair-logic-text.tsx" />
 

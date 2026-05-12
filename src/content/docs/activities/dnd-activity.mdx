@@ -3,6 +3,8 @@ title: Actividades de arrastrar y soltar
 description: Componente DndActivity para crear ejercicios interactivos de arrastrar palabras a zonas de texto.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `DndActivity` es el componente raíz que orquesta la actividad completa. Gestiona el estado global de arrastre, validación y resultados. Se compone de tres subcomponentes: `DragAndDrop.Container`, `DragAndDrop.Drag` y `DragAndDrop.Drop`.
 
 ## Vista previa
@@ -198,6 +200,8 @@ Fuera del `Content`, agrega el `Modal` de gamificación y los dos `ToastFeedback
 | `announcements` | `() => void` | | Función para anuncios de accesibilidad (lectores de pantalla) |
 | `onResult` | `(result) => void` | | Callback al comprobar. Recibe el resultado de la validación |
 
+<CoreRepoInfo corePath="components/activities/dnd-activity/dnd.tsx" />
+
 ## Props de DragAndDrop.Container
 
 | Prop | Tipo | Req. | Descripción |
@@ -222,11 +226,14 @@ Fuera del `Content`, agrega el `Modal` de gamificación y los dos `ToastFeedback
 | `label` | `string` | | Etiqueta accesible del espacio vacío |
 | `addClass` | `string` | | Clases utilitarias (ej: `"u-mx-1"`) |
 
+
 ## Props de DndActivity.Button
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como "Comprobar". Con `"reset"` reinicia el estado completo |
+
+<CoreRepoInfo corePath="components/activities/dnd-activity/dnd-buttons.tsx" />
 
 ## Flujo de validación
 

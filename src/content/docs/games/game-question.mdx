@@ -3,6 +3,8 @@ title: Juego de preguntas
 description: Componente GameQuestion para crear actividades de selección múltiple con imagen de fondo y respuestas cortas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `GameQuestion` es el componente raíz para crear preguntas de selección múltiple presentadas en una tarjeta con imagen y respuestas cortas. Gestiona el estado de selección, validación y resultado. Se compone de tres subcomponentes: `GameQuestion.Card`, `GameQuestion.Radio` y `GameQuestion.Button`.
 
 :::caution[Diseñado para respuestas cortas con imagen]
@@ -203,6 +205,8 @@ Contenedor raíz. Gestiona el estado global de selección y validación.
 | `onResult` | `({ result, options }) => void` | | Callback al comprobar. Recibe `result` (boolean) y el array de opciones seleccionadas |
 | `minSelected` | `number` | | Mínimo de opciones seleccionadas para habilitar Comprobar. Por defecto `1` |
 
+<CoreRepoInfo corePath="components/games/game-question/game-question.tsx" />
+
 ---
 
 ### `GameQuestion.Card`
@@ -216,6 +220,8 @@ Tarjeta visual que contiene la pregunta y las opciones. Soporta imagen de fondo 
 | `background` | `string` | | Ruta de la imagen de fondo de la tarjeta |
 | `questionNumber` | `string` | | Número visible de la pregunta |
 | `addClass` | `string` | | Clases utilitarias adicionales para el contenedor |
+
+<CoreRepoInfo corePath="components/games/game-question/game-question-card.tsx" />
 
 ---
 
@@ -232,6 +238,8 @@ Cada opción de respuesta. Pensado para respuestas cortas: palabras, números o 
 
 > Debe haber exactamente un `state="success"` por tarjeta.
 
+<CoreRepoInfo corePath="components/games/game-question/game-question-radio.tsx" />
+
 ---
 
 ### `GameQuestion.Button`
@@ -241,3 +249,5 @@ Botón de acción. Siempre debe ir dentro de `<GameQuestion>`, fuera del `Card`.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia la selección |
+
+<CoreRepoInfo corePath="components/games/game-question/game-question-button.tsx" />

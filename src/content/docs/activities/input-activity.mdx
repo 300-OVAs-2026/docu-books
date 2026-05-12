@@ -3,6 +3,8 @@ title: Actividades con campos de entrada
 description: Componente Inputs para crear ejercicios donde el estudiante debe escribir respuestas directas en campos de texto.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Inputs` es el componente raíz utilizado para actividades de rellenar huecos o escribir respuestas libres cortas que serán confrontadas contra un arreglo de opciones válidas. Como componente contendor gestiona el estado, coordina los inputs hijos y dictamina el resultado. Se compone de los subcomponentes `Inputs.Input` e `Inputs.Button`.
 
 ## Vista previa
@@ -151,6 +153,8 @@ La actividad incluye texto de lectura y fragmentos de `Inputs.Input` intercalado
 |---|---|---|---|
 | `onResult` | `({ result: boolean, inputs: Input[] }) => void` | | Función callback llamada al realizar la validación general de toda la actividad. |
 
+<CoreRepoInfo corePath="components/activities/input-activity/input-activity.tsx" />
+
 ## Props de Inputs.Input
 
 Este elemento inyecta nativamente la etiqueta de recolección de entradas (`<input type="text">`).
@@ -162,8 +166,12 @@ Este elemento inyecta nativamente la etiqueta de recolección de entradas (`<inp
 | `correctAnswers` | `string[]` | ✓ | Conjunto de respuestas aceptadas y evaluadas como correctas para el estudiante. (Procura coincidir exactitudes sin dejar espacios sobrantes). |
 | `addClass` | `string` | | Útil para aplicar tamaños o fuentes específicas integrando utilitarios. |
 
+<CoreRepoInfo corePath="components/activities/input-activity/input-element.tsx" />
+
 ## Props de Inputs.Button
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Dejar sin valor actúa en concordancia para el sometimiento (Comprobar). Si posee `"reset"`, borrará tanto lo escrito como sus estados e indicadores de error o acierto. |
+
+<CoreRepoInfo corePath="components/activities/input-activity/input-button.tsx" />

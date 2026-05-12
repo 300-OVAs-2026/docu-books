@@ -3,6 +3,8 @@ title: Actividades con selección única
 description: Componente Radios para crear preguntas de verdadero/falso o selección única.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Radios` es el componente raíz para crear preguntas de selección única o verdadero/falso. Gestiona el estado de selección, validación y resultado de cada pregunta. Se compone de dos subcomponentes: `Radios.Radio` y `Radios.Button`.
 
 ## Vista previa
@@ -135,6 +137,8 @@ Fuera del layout principal, agrega el `Modal` y los dos `ToastFeedback`:
 |---|---|---|---|
 | `onResult` | `({ result: boolean }) => void` | ✓ | Callback al comprobar. Recibe si la respuesta es correcta |
 
+<CoreRepoInfo corePath="components/activities/radio-activity/radio-activity.tsx" />
+
 ## Props de Radios.Radio
 
 | Prop | Tipo | Req. | Descripción |
@@ -144,8 +148,12 @@ Fuera del layout principal, agrega el `Modal` y los dos `ToastFeedback`:
 | `label` | `string` | ✓ | Texto visible de la opción |
 | `state` | `"success" \| "wrong"` | ✓ | Marca si la opción es correcta o incorrecta |
 
+<CoreRepoInfo corePath="components/activities/radio-activity/radio-element.tsx" />
+
 ## Props de Radios.Button
 
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor actúa como "Comprobar". Con `"reset"` reinicia la pregunta |
+
+<CoreRepoInfo corePath="components/activities/radio-activity/radio-button.tsx" />

@@ -3,6 +3,8 @@ title: Juego de carrera con preguntas
 description: Componente RaceCard para crear actividades interactivas de preguntas de selección múltiple con una animación de carrera de autos.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `RaceCard` es el componente raíz que envuelve toda la actividad de carrera. El estudiante responde preguntas de selección múltiple y por cada respuesta correcta su auto avanza en la pista superando al competidor. Gestiona el conteo de preguntas y el progreso de la carrera. Se compone de cuatro subcomponentes: `RaceCard.Init`, `RaceCard.Scene`, `RaceCard.Radio` y el `RaceCard` raíz como wrapper global.
 
 ## Vista previa
@@ -163,11 +165,7 @@ El juego usa `id^="question-svg-"` para ubicar la escena activa en el DOM. Si el
       </figure>
     </Panel.Section>
 
-    {/* Pregunta 2, 3, 4... mismo patrón */}
-
-    <Modal audio="..." interpreter={{ contentURL: '...' }} />
-    <ToastFeedback type="success" isOpen={isOpen === MODALS.TRUE} onClose={closeModal} ...>...</ToastFeedback>
-    <ToastFeedback type="wrong"   isOpen={isOpen === MODALS.FALSE} onClose={closeModal} ...>...</ToastFeedback>
+    {/* Pregunta 2, 3, 4... mismo patrón + modal y toast */}
 
   </Panel>
 </RaceCard>
@@ -215,6 +213,8 @@ Wrapper global que envuelve todo el OVA incluyendo el `Panel`. Controla el progr
 |---|---|---|---|
 | `questionCount` | `number` | ✓ | Total de preguntas. Determina cuánto avanza el auto por cada respuesta correcta |
 
+<CoreRepoInfo corePath="components/games/game-race-card/race-card.tsx" />
+
 ---
 
 ### `RaceCard.Init`
@@ -224,6 +224,8 @@ Pantalla de instrucciones y animación inicial. Va en la primera sección del `P
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `messageInitial` | `string` | ✓ | Texto de instrucciones. Acepta HTML (ej: `<br />`, `<strong>`) |
+
+<CoreRepoInfo corePath="components/games/game-race-card/race-card-initial.tsx" />
 
 ---
 
@@ -239,6 +241,8 @@ Escena de cada pregunta. Incluye la animación de la pista, la pregunta y las op
 | `notifyReset` | `() => void` | ✓ | Función del hook de gamificación para notificar el reinicio |
 | `drivers` | `{ machine: string }` | | Nombre del auto competidor que aparece en la animación |
 
+<CoreRepoInfo corePath="components/games/game-race-card/race-card-scene.tsx" />
+
 ---
 
 ### `RaceCard.Radio`
@@ -253,3 +257,5 @@ Cada opción de respuesta dentro de una escena.
 | `state` | `"success" \| "wrong"` | ✓ | Define si la opción es correcta o incorrecta |
 
 > Debe haber exactamente un `state="success"` por escena.
+
+<CoreRepoInfo corePath="components/games/game-race-card/race-card-input.tsx" />

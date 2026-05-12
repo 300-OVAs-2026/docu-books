@@ -3,6 +3,8 @@ title: Header
 description: Componente de cabecera del OVA. Incluye el logo, el menú de navegación, el overlay de accesibilidad y el botón de saltar al contenido principal.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Header` es el componente de cabecera que aparece en todas las páginas del OVA. Gestiona el estado de apertura/cierre del menú, la ayuda y el panel de accesibilidad, y renderiza el logo de la UNAD adaptado según la ruta actual. Incluye `SkipToMain`, un botón accesible para saltar directamente al contenido principal.
 
 ## Cómo implementarlo
@@ -98,3 +100,5 @@ interface HeaderContextType {
 :::tip[El Header ya está incluido en el layout raíz]
 En la mayoría de los OVAs el `Header` ya está montado en el layout principal del proyecto. No es necesario agregarlo en cada página — solo confirma que esté en el componente raíz de la aplicación.
 :::
+
+<CoreRepoInfo corePath="components/layouts/header/header.tsx" />

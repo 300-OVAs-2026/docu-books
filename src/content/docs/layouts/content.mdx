@@ -3,6 +3,8 @@ title: Content
 description: Layout base para las páginas de un OVA. Muestra el título, las estrellas de gamificación y envuelve el contenido con una animación de entrada.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `Content` es el layout base que envuelve el contenido de cada página de un OVA. Se encarga de mostrar el título de la página, las estrellas de gamificación, conectar el intérprete de lengua de señas y aplicar una animación de entrada suave al montar el componente.
 
 ## Cómo implementarlo
@@ -100,3 +102,7 @@ const { Stars, Modal, notifyReset, reportResult } = useGamification({
 :::note[`interpreter` actualiza el intérprete al montar]
 Cada vez que el componente se monta o cambia `interpreter`, llama al hook `useInterpreter` para actualizar los videos del intérprete en modo `fixed`. Esto significa que al navegar entre secciones el intérprete cambia automáticamente al video correspondiente a esa sección.
 :::
+
+<CoreRepoInfo corePath="components/layouts/content/content.tsx" />
+
+

@@ -3,6 +3,8 @@ title: Actividad Tabla Verdadero o Falso
 description: Componente TableTrueFalseActivity para crear actividades de evaluación donde el estudiante clasifica afirmaciones como verdaderas o falsas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `TableTrueFalseActivity` es el componente raíz para crear actividades donde el estudiante evalúa una lista de afirmaciones marcando cada una como verdadera o falsa. Gestiona el estado de selección, validación y resultado. Se compone de tres subcomponentes: `TableTrueFalseActivity.Option`, `TableTrueFalseActivity.Feedback` y `TableTrueFalseActivity.Button`.
 
 :::note[Dos variaciones según el nivel de retroalimentación]
@@ -248,6 +250,8 @@ Contenedor raíz. Gestiona el estado de todas las afirmaciones y la validación 
 | `options` | `{ id: string; label: string; correct: boolean }[]` | ✓ | Array con las afirmaciones. Define el `id`, el texto y si es verdadera o falsa |
 | `onResult` | `({ result: boolean }) => void` | ✓ | Callback al comprobar. En la **variación A** abre el toast de resultado. En la **variación B** solo reporta el resultado a gamificación sin abrir modal |
 
+<CoreRepoInfo corePath="components/activities/table-true-false-activity/table-true-false-activity.tsx" />
+
 ---
 
 ### `TableTrueFalseActivity.Option`
@@ -259,6 +263,8 @@ Cada afirmación con sus botones de Verdadero y Falso.
 | `id` | `string` | ✓ | Debe coincidir con el `id` del ítem en el array `options` |
 | `label` | `string` | ✓ | Texto de la afirmación |
 | `correct` | `boolean` | ✓ | Define si la afirmación es verdadera (`true`) o falsa (`false`) |
+
+<CoreRepoInfo corePath="components/activities/table-true-false-activity/true-false-option.tsx" />
 
 ---
 
@@ -272,6 +278,8 @@ Retroalimentación individual por afirmación. Solo se usa en la **variación B*
 | `success` | `{ feedback: string; audio: string; interpreter: string }` | ✓ | Retroalimentación cuando el estudiante acierta esa afirmación |
 | `wrong` | `{ feedback: string; audio: string; interpreter: string }` | ✓ | Retroalimentación cuando el estudiante se equivoca en esa afirmación |
 
+<CoreRepoInfo corePath="components/activities/table-true-false-activity/table-true-false-feedback.tsx" />
+
 ---
 
 ### `TableTrueFalseActivity.Button`
@@ -281,3 +289,5 @@ Botón de acción. Siempre va dentro de `<TableTrueFalseActivity>`, fuera de los
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Sin valor comprueba y dispara `onResult`. Con `"reset"` reinicia todas las selecciones |
+
+<CoreRepoInfo corePath="components/activities/table-true-false-activity/table-true-false-button.tsx" />

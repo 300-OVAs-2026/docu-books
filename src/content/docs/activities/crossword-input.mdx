@@ -3,6 +3,8 @@ title: Crucigramas interactivos
 description: Componentes CrosswordActivity y CrosswordInput para crear crucigramas interactivos.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `CrosswordActivity` y `CrosswordInput` son los componentes encargados de construir crucigramas interactivos. Se complementan con el hook `useCrossWordState` para gestionar de forma centralizada la validez, respuestas y visibilidad de las pistas.
 
 ## Vista previa
@@ -128,7 +130,7 @@ La estructura del crucigrama se divide en dos partes: el layout general proporci
     />
   )}
 
-  {/* Representación visual opcional de la palábra en la matrix usando answers.question1.array ... */}
+  {/* Representación visual opcional de la palabra en la matrix usando answers.question1.array ... */}
 
   <CrosswordActivity.Button>
     <Button 
@@ -186,6 +188,8 @@ Contenedor principal interactivo.
 | `title` | `JSX.Element` | ✓ | Título de la actividad cruzada mostrado inferiormente en itálica. |
 | `addClass` | `string` | | Clases CSS adicionales. |
 
+<CoreRepoInfo corePath="components/activities/crossword-input/crossword-activity.tsx" />
+
 ## Props de CrosswordInput
 
 Componente dinámico que maneja el formulario individual asociado a cada pista e input de teclado.
@@ -203,6 +207,8 @@ Componente dinámico que maneja el formulario individual asociado a cada pista e
 | `validation` | `string[]` | ✓ | Array principal general devuelto por el hook con los estatus de todos los inputs (`"right" \| "wrong" \| ""`). |
 | `hasSpace` | `boolean` | | Indica si la respuesta esperada contiene espacios. Por defecto: `false`. |
 | `audio` | `string` | | Ruta de una pista narrada en audio, de estar disponible. |
+
+<CoreRepoInfo corePath="components/activities/crossword-input/crossword-input.tsx" />
 
 ## Returns del hook `useCrossWordState`
 

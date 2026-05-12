@@ -3,6 +3,8 @@ title: Relacionar conceptos
 description: Componente RelationConcept para crear actividades interactivas de emparejamiento de conceptos, textos e imágenes.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 `RelationConcept` es un componente interactivo diseñado para actividades donde el estudiante debe vincular o emparejar dos elementos (por ejemplo, concepto y definición, imagen y texto, etc.). Soporta visualización en pantalla completa de forma nativa y maneja automáticamente las reglas del emparejamiento usando grupos numéricos de validación.
 
 ## Vista previa
@@ -163,6 +165,8 @@ Componente contenedor principal genérico supervisor interactivo.
 | `pairs` | `Option[]` | ✓ | Arreglo global de todas las opciones en la actividad para el seguimiento. `{id, label, pair}`. |
 | `onResult` | `({ result: boolean, options: Option[] }) => void` | | Función callback llamada al realizar la validación tras pulsar el usuario "Comprobar". |
 
+<CoreRepoInfo corePath="components/activities/relation-concept-activity/relation-concept-activity.tsx" />
+
 ## Props de RelationConcept.Card
 
 Despliega visualmente en grilla los interactivos o tarjetas a emparejar. Es capaz de mostrar botones nativos de expansión general o FullScreen.
@@ -173,6 +177,8 @@ Despliega visualmente en grilla los interactivos o tarjetas a emparejar. Es capa
 | `pairs` | `Option[]` | ✓ | Sub-arreglo de opciones solo para este subgrupo de tarjetas. Si `label` es un URL de imagen, dibuja la misma. |
 | `addClass` | `string` | | Clases aplicadas directamente al `grid-wrapper`. |
 
+<CoreRepoInfo corePath="components/activities/relation-concept-activity/relation-concept-card.tsx" />
+
 ## Props de RelationConcept.Button
 
 Controlador estricto de interacciones de finalización.
@@ -180,3 +186,5 @@ Controlador estricto de interacciones de finalización.
 | Prop | Tipo | Req. | Descripción |
 |---|---|---|---|
 | `type` | `"reset"` | | Dejar sin valor evalúa a modo de comprobación de respuestas ingresadas. De poseer el flag `"reset"`, borrará tanto las pulsaciones previas como los identificadores evaluados. |
+
+<CoreRepoInfo corePath="components/activities/relation-concept-activity/relation-concept-button.tsx" />
