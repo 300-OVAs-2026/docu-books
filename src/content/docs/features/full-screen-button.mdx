@@ -3,6 +3,8 @@ title: Full Screen Button
 description: Componente para añadir un botón que expanda un elemento al tamaño de la pantalla (Full Screen mode).
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `FullScreenButton` provee una interfaz gráfica lista para gestionar la entrada y salida del modo "Pantalla Completa" vía el hook `useFullScreen`. Evalúa y deshabilita si el modo estricto de _Full Screen_ no es soportado por el navegador actual del usuario.
 
 ## Cómo implementar
@@ -44,6 +46,8 @@ El componente extiende propiedades base del componente `<Button />` tipado desde
 | `controlFullScreen` | `boolean` | Alternar a modo _Full Screen_ programáticamente cuando este booleano se vuelva verdadero. | `undefined` |
 | `onClick` | `function` | Función `callback` al hacer click sobre el botón. | `undefined` |
 | `addClass` | `string` | Clases de estilo auxiliares. | `undefined` |
+
+<CoreRepoInfo corePath="components/features/full-screen-button/fullscreen-button.tsx" />
 
 ---
 

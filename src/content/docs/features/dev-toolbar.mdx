@@ -3,6 +3,8 @@ title: Dev Toolbar
 description: Herramienta flotante para desarrolladores u administradores del OVA.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `DevToolbar` ("OVA - Dev Tools") es una barra lateral colapsable (con estilo de burbuja flotante inferior izquierda) exclusiva de desarrollo. Facilita una manera rápida de reiniciar el estado global o borrar persistencias sin tener que abrir la consola del navegador.
 
 ## Cómo implementar
@@ -45,6 +47,8 @@ Al ser autónomo y actuar como un _Floating Widget_, no recibe `Props`.
 | Prop | Tipo | Descripción |
 |---|---|---|
 | `-` | `-` | No aplica. |
+
+<CoreRepoInfo corePath="components/features/dev-toolbar/dev-toolbar.tsx" />
 
 ---
 

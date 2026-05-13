@@ -3,6 +3,8 @@ title: Toast Feedback
 description: Componente de retroalimentación visual y auditiva para actividades.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El `ToastFeedback` es una especialización del componente `Toast` diseñado para dar respuesta inmediata al usuario tras realizar una acción o actividad, indicando si el resultado fue exitoso o erróneo.
 
 ## Características Principales
@@ -26,7 +28,7 @@ const MyActivity = () => {
   const [showFeedback, setShowFeedback] = useState(false);
 
   return (
-    <>
+    <> 
       <button onClick={() => setShowFeedback(true)}>Verificar</button>
 
       {showFeedback && (
@@ -57,6 +59,8 @@ Además de los parámetros heredados de `ToastCoreProps` (como `onClose` o `dura
 | `label` | `string` | Título personalizado. Si no se provee, usa la traducción por defecto. | - |
 | `audio` | `string` | Ruta al archivo de audio para feedback sonoro. | - |
 | `addClass` | `string` | Clase CSS adicional para el contenedor. | `''` |
+
+<CoreRepoInfo corePath="components/features/toast-feedback/toast-feedback.tsx" />
 
 ---
 

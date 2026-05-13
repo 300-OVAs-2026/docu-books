@@ -3,6 +3,8 @@ title: Modal Bibliography
 description: Componente para mostrar listados de referencias bibliográficas en una ventana modal.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `ModalBibliography` facilita la presentación de fuentes, referencias y enlaces externos utilizados en el OVA. Utiliza un patrón de **Componentes Compuestos**, permitiendo definir el contenedor del modal y sus enlaces individuales de forma estructurada.
 
 ## Cómo implementar
@@ -51,6 +53,8 @@ Extiende las propiedades base de `Modal`.
 | `audio` | `string` | Ruta de un archivo de audio que se reproducirá al abrir el modal. | `undefined` |
 | `multipleChildren` | `boolean` | Si es `true`, no envuelve los hijos en una etiqueta `<ul>`. | `false` |
 
+<CoreRepoInfo corePath="components/features/modal-bibliography/modal-bibliography.tsx" />
+
 ### `ModalBibliography.Link` (Entrada)
 
 | Prop | Tipo | Descripción |
@@ -59,6 +63,8 @@ Extiende las propiedades base de `Modal`.
 | `authors` | `string` | Nombre de los autores o entidad responsable. |
 | `link` | `string` | URL externa para consultar el recurso. |
 | `addClass` | `string` | Clase CSS adicional para la entrada. |
+
+<CoreRepoInfo corePath="components/features/modal-bibliography/modal-bibliography-link.tsx" />
 
 ---
 

@@ -3,6 +3,8 @@ title: Comic Viewer
 description: Componente visor de imágenes múltiples o cómics interactivo.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `ComicViewer` proporciona una vista interactiva de lectura de cómics o secuencias de imágenes. Permite navegar entre una lista de páginas, acercar y alejar la imagen (zoom) de forma controlada, y arrastrar la imagen (`drag and drop`) usando eventos táctiles o del mouse cuando ésta se encuentra ampliada.
 
 ## Características Principales
@@ -43,6 +45,8 @@ const MyComponent = () => {
 | Prop | Tipo | Descripción | Default |
 |---|---|---|---|
 | `pages` | `string[]` | **(Requerido)** Un array con las rutas de las imágenes que compondrán las páginas del cómic secuencialmente. | `-` |
+
+<CoreRepoInfo corePath="components/features/comic-viewer/comic-viewer.tsx" />
 
 ---
 

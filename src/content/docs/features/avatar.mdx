@@ -3,6 +3,8 @@ title: Avatar y ChoiceAvatar
 description: Componentes para el manejo y selección de avatares que acompañan el contenido en pantalla.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 Este módulo proporciona dos funcionalidades integradas: `Avatar`, para renderizar la imagen del avatar seleccionado actualmente a lo largo del material, y `ChoiceAvatar`, un panel interactivo que le permite al usuario elegir qué avatar lo acompañará. El estado global se gestiona a través de `useOvaStore`.
 
 ## Cómo implementar
@@ -54,9 +56,13 @@ Este componente extiende los atributos nativos de un `<img>` estándar de HTML.
 | `size` | `string` | Tamaño para renderizar la imagen base. | `'26.875rem'` |
 | `noCaption` | `boolean` | Oculta la leyenda del origen de la imagen. | `undefined` |
 
+<CoreRepoInfo corePath="components/features/avatar/avatar.tsx" />
+
 ### `ChoiceAvatar`
 
 No recibe propiedades directas (`Props`), pues todo su estado es manejado de manera interna consultando `useOvaStore` y dibujando múltiples secciones en paneles paginados (`AVATARS_PER_SECTION = 6`). 
+
+<CoreRepoInfo corePath="components/features/avatar/choice-avatar.tsx" />
 
 ---
 

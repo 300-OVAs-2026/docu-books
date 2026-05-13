@@ -3,6 +3,8 @@ title: Learning Path
 description: Mapa interactivo que visualiza el progreso del usuario a través de las páginas del OVA.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `LearningPath` es una interfaz de navegación visual (estilo "camino de aprendizaje") que muestra el listado de páginas disponibles en el material. Bloquea el acceso a secciones futuras basándose en si la página anterior ha sido visitada, utilizando el estado global de `useOvaStore`.
 
 ## Características Principales
@@ -46,6 +48,8 @@ El componente principal `LearningPath` no recibe propiedades, ya que su lógica 
 Los sub-componentes internos son:
 - `PageNode`: Gestiona el enlace, el tooltip y el estado bloqueado de cada página.
 - `BridgeSvg`: Dibuja las líneas de conexión dinámicas entre los nodos.
+
+<CoreRepoInfo corePath="components/features/learning-path/learning-path.tsx" />
 
 ---
 

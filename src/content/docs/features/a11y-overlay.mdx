@@ -3,6 +3,8 @@ title: A11y Overlay
 description: Componente para añadir un menú lateral de opciones de accesibilidad.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `A11yOverlay` proporciona un panel completo de opciones de accesibilidad (a11y) interactivas, permitiendo al usuario configurar contrastes, tamaños de fuente, modo oscuro, fuentes para dislexia, lectura en voz alta, entre otros.
 
 
@@ -45,6 +47,8 @@ const Layout = () => {
 |---|---|---|
 | `isOpen` | `boolean` | Indica si el panel de accesibilidad está visible. |
 | `onClose` | `() => void` | Función de callback que se ejecuta para cerrar el panel. |
+
+<CoreRepoInfo corePath="components/features/a11y-overlay/a11y-overlay.tsx" />
 
 ---
 

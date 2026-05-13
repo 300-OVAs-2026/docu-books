@@ -3,6 +3,8 @@ title: Math Container
 description: Componente para renderizar fórmulas matemáticas complejas utilizando LaTeX y MathJax.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `MathContainer` permite la visualización de notación matemática científica dentro del OVA. Utiliza la librería `MathJax` para renderizar código LaTeX de forma elegante y accesible, incluyendo soporte para colores y escalado automático según el dispositivo.
 
 ## Características Principales
@@ -41,6 +43,8 @@ const MyMathSection = () => {
 |---|---|---|---|
 | `children` | `React.ReactNode` | **(Requerido)** El contenido a renderizar. Si es un `string`, se tratará como LaTeX puro. | `-` |
 | `className` | `string` | Clase CSS adicional para el contenedor de la fórmula. | `undefined` |
+
+<CoreRepoInfo corePath="components/features/math-container/math-container.tsx" />
 
 ---
 

@@ -3,6 +3,8 @@ title: Interpreter
 description: Ventana flotante interactiva para video-interpretación en lengua de señas.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `Interpreter` es una herramienta de accesibilidad que despliega una ventana flotante con videos de interpretación en Lengua de Señas. Permite al usuario ver el contenido descriptivo o de apoyo visual de manera sincronizada y controlada.
 
 ## Características Principales
@@ -53,6 +55,8 @@ const updateInterpreter = (videoUrl: string) => {
 | Prop | Tipo | Descripción | Default |
 |---|---|---|---|
 | `className` | `string` | Clase CSS adicional para el contenedor principal. | `undefined` |
+
+<CoreRepoInfo corePath="components/features/interpreter/interpreter.tsx" />
 
 ---
 

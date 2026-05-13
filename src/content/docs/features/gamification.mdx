@@ -3,6 +3,8 @@ title: Gamification
 description: Sistema de recompensas, estrellas y medallas para actividades y juegos.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El ecosistema de `Gamification` permite incentivar al usuario mediante un sistema de estrellas y medallas basado en su desempeño en las actividades. Se gestiona principalmente a través del hook `useGamification`, que conecta el estado visual con el almacenamiento global (`useGamificationStore`).
 
 ## Funcionamiento General
@@ -60,6 +62,8 @@ const MyActivity = () => {
 | `maxStars` | `number` | Cantidad de estrellas iniciales. | `3` |
 | `onRestart` | `() => void` | Callback opcional que se ejecuta al darle al botón "Reiniciar" del modal. | `undefined` |
 
+<CoreRepoInfo corePath="components/features/gamification/use-gamification.tsx" />
+
 ---
 
 ## Retorno del Hook (Componentes y Funciones)
@@ -85,3 +89,4 @@ El componente utiliza módulos CSS para el manejo de los estados visuales de los
 - `.modal__medal`: Contenedor circular que muestra el ícono de trofeo (`award`).
 - `.modal__score`: Estilos destacados para el marcador numérico (Ej: **4** / 5).
 - `.modal__medal-text`: Estilo de etiqueta redondeada para el nombre de la medalla obtenida.
+

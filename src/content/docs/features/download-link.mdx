@@ -3,6 +3,8 @@ title: Download Link
 description: Componente para renderizar enlaces optimizados para la descarga de archivos.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `DownloadLink` proporciona un enlace (`<a>`) con el atributo nativo `download`, estilizado como un botón interactivo. Es útil para ofrecer recursos adicionales, PDFs, o archivos multimedia listos para ser guardados en el dispositivo del usuario.
 
 ## Cómo implementar
@@ -41,6 +43,8 @@ const SectionResources = () => {
 | `iconName` | `string` | Nombre del icono a mostrar (utiliza el componente `Icon`). | `'arrow-right-button'` |
 | `addClass` | `string` | Clases CSS auxiliares a inyectar en la etiqueta. | `undefined` |
 | `ariaLabel` | `string` | Etiqueta accesible para lectores de pantalla. | ``Descargar ${label}`` |
+
+<CoreRepoInfo corePath="components/features/download-link/download-link.tsx" />
 
 ---
 

@@ -3,6 +3,8 @@ title: Full Screen Alert
 description: Componente para advertir o sugerir el uso de pantalla completa al usuario.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `FullScreenAlert` muestra un mensaje de advertencia o sugerencia de usabilidad cuando el dispositivo (usualmente tabletas o teléfonos en orientación vertical) tiene una pantalla pequeña. Su propósito principal es recomendar al usuario girar la pantalla o habilitar la vista completa ("Full Screen") para interactuar de forma adecuada con elementos que requieren mayor espacio (como interactividades, cómics o juegos).
 
 ## Cómo implementar
@@ -37,6 +39,8 @@ const GameSection = () => {
 | `addClass` | `string` | Clases CSS adicionales para inyectar al contenedor de la alerta. | `undefined` |
 
 _La etiqueta de texto que se renderiza usa el idioma administrado a través de `useOvaStore` (Traducción automática)._
+
+<CoreRepoInfo corePath="components/features/full-screen-alert/fullscreen-alert.tsx" />
 
 ---
 

@@ -8,12 +8,19 @@ const { corePath } = Astro.props;
 const apiUrl = `https://api.github.com/repos/300-OVAs-2026/core/commits?path=${corePath}&sha=develop&per_page=1`;
 
 let lastUpdated = 'Desconocida';
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
 try {
-  const response = await fetch(apiUrl);
+  const response = await fetch(apiUrl, {
+    headers: {
+      ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
+      'User-Agent': 'Astro-Build'
+    }
+  });
+
   if (response.ok) {
     const data = await response.json();
-    if (data && data.length > 0) {
+    if (Array.isArray(data) && data.length > 0) {
       const dateString = data[0].commit.committer.date;
       lastUpdated = new Date(dateString).toLocaleDateString('es-ES', {
         year: 'numeric',
@@ -21,9 +28,12 @@ try {
         day: 'numeric'
       });
     }
+  } else {
+    const errorData = await response.json().catch(() => ({}));
+    console.warn(`[CoreRepoInfo] No se pudo obtener info para ${corePath}: ${response.status} ${response.statusText}`, errorData.message || '');
   }
 } catch (error) {
-  console.error("Error obteniendo datos del repo core", error);
+  console.error(`[CoreRepoInfo] Error de red al consultar ${corePath}:`, error);
 }
 
 const viewUrl = `https://github.com/300-OVAs-2026/core/blob/develop/${corePath}`;

@@ -3,6 +3,8 @@ title: Modal Feedback
 description: Componente para mostrar retroalimentación visual y auditiva tras una acción (acierto o error).
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `ModalFeedback` se utiliza para proporcionar una respuesta inmediata al usuario después de interactuar con actividades o juegos. Soporta dos estados visuales principales: **éxito** (`success`) y **error** (`wrong`), integrando imágenes ilustrativas y soporte de audio.
 
 ## Cómo implementar
@@ -47,6 +49,8 @@ Este componente extiende las propiedades base de `Modal`.
 | `audio` | `string` | Ruta al archivo de audio de retroalimentación. | `undefined` |
 | `addClass` | `string` | Clase CSS adicional para el contenedor. | `undefined` |
 | `children` | `React.ReactNode` | Contenido adicional (párrafos, botones de acción, etc.) que aparecerá debajo del título. | `undefined` |
+
+<CoreRepoInfo corePath="components/features/modal-feedback/modal-feedback.tsx" />
 
 ---
 

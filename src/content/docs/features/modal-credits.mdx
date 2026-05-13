@@ -3,6 +3,8 @@ title: Modal Credits
 description: Componente para visualizar los créditos, autores y licencias del OVA.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El componente `ModalCredits` permite desplegar una ventana modal que contiene la información institucional, los nombres de los docentes responsables y las licencias de uso del recurso educativo digital.
 
 ## Cómo implementar
@@ -44,6 +46,8 @@ Este componente extiende las propiedades base de `Modal`.
 | `year` | `string` | Año de publicación del recurso. | Año actual (auto-calculado). |
 | `audio` | `string` | Ruta al archivo de audio descriptivo. | `undefined` |
 | `addClass` | `string` | Clases CSS adicionales. | `undefined` |
+
+<CoreRepoInfo corePath="components/features/modal-credits/modal-credits.tsx" />
 
 ---
 

@@ -3,6 +3,8 @@ title: Posicionador sobre SVG (SvgPositioner)
 description: Sistema para posicionar elementos HTML de forma responsiva sobre una imagen SVG utilizando coordenadas de ViewBox.
 ---
 
+import CoreRepoInfo from '../../../components/CoreRepoInfo.astro';
+
 El `SvgPositioner` es una herramienta potente que permite superponer componentes HTML (como botones, textos o actividades) sobre una imagen SVG, manteniendo la proporción y posición exacta independientemente del tamaño de la pantalla.
 
 ## Características Principales
@@ -56,6 +58,8 @@ const MyMap = () => {
 | `addClass` | `string` | Clase CSS adicional para el contenedor. | `''` |
 | `children` | `ReactNode` | Debe incluir el `<svg>` y los `<SvgElement>`. | - |
 
+<CoreRepoInfo corePath="components/features/svg-positioner/svg-positioner.tsx" />
+
 ### `SvgElement` (Hijo posicionado)
 
 | Prop | Tipo | Descripción | Default |
@@ -66,6 +70,8 @@ const MyMap = () => {
 | `height` | `number` | **(Requerido)** Alto basado en el ViewBox del SVG. | - |
 | `type` | `string` | El tag HTML a renderizar para este elemento. | `'div'` |
 | `addClass` | `string` | Clase CSS adicional. | `''` |
+
+<CoreRepoInfo corePath="components/features/svg-positioner/svg-element.tsx" />
 
 ---
 
