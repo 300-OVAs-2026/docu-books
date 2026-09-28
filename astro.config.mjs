@@ -14,8 +14,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://demos.booksandbooksdigital.com.co",
-  base: "/docu-books/",
+  site: "https://demos.booksandbooksdigital.com.co/300-ovas-2026/docs/",
+  base: "/300-ovas-2026/docs/",
   integrations: [
     starlight({
       title: "OVAS 2026",
