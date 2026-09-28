@@ -8,7 +8,18 @@
     "dist"
   ],
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],      "@/shared/*": ["src/components/shared/*"],      "@shared/*": ["src/components/shared/*"],
+      "@activities/*": ["src/components/shared/components/activities/*"],
+      "@features/*": ["src/components/shared/components/features/*"],
+      "@games/*": ["src/components/shared/components/games/*"],
+      "@layouts/*": ["src/components/shared/components/layouts/*"],
+      "@ui/*": ["src/components/shared/components/ui/*"],
+      "@styles/*": ["src/components/shared/styles/*"]
+    }
   }
 }

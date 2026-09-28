@@ -1,13 +1,110 @@
 ---
-title: Bienvenid@s a la documentación oficial de Books&Books equipo frontend
-description: Acá estará toda la información necesaria para aprender a maquetar.
+title: Bienvenid@s a la documentación de Ovas
+description: Todo lo que necesita el equipo frontend para maquetar con consistencia, velocidad y buen criterio.
+tableOfContents: false
 hero:
-  tagline: Acá estará toda la información necesaria para aprender a maquetar.
-  image:
-    file: ../../assets/Books.webp
-  actions:
-    - text: Leer docs
-      link: /guides/uso/
-      icon: right-arrow
+  tagline: La fuente de verdad del equipo frontend para el proyecto de Ovas. Componentes, actividades, hooks y utilidades para maquetar sin adivinar.
 ---
 
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <LinkCard
+    title="Actividades"
+    icon="rocket"
+    href="/docu-books/activities/checkbox-activity/"
+    description="Selección múltiple, crucigramas, campos de entrada, drag and drop, relacionar conceptos, selectores y más."
+  />
+  <LinkCard
+    title="Juegos"
+    icon="star"
+    href="/docu-books/games/game-ballons/"
+    description="Botellas, casino educativo, peces, economía, asociación de frases e imágenes, preguntas, espacial y globos."
+  />
+  <LinkCard
+    title="Layouts"
+    icon="template"
+    href="/docu-books/layouts/content/"
+    description="Estructuras de página, contenedores principales y organización de vistas para diferentes tipos de contenido."
+  />
+  <LinkCard
+    title="Features"
+    icon="star"
+    href="/docu-books/features/a11y-overlay/"
+    description="Componentes de funcionalidad específica como superposición de accesibilidad, gestión de fondos, pantalla completa y atajos de teclado."
+  />
+  <LinkCard
+    title="Componentes UI"
+    icon="puzzle"
+    href="/docu-books/ui/accordion/"
+    description="Botones, modales, alertas, iconos, acordeones, imágenes con leyenda, cargadores y contenedores decorativos."
+  />
+  <LinkCard
+    title="Scripts"
+    icon="document"
+    href="/docu-books/scripts/clone/"
+    description="Lógica de validación, manejo de eventos y scripts utilitarios para el comportamiento interactivo."
+  />
+  <LinkCard
+    title="Hooks"
+    icon="random"
+    href="/docu-books/hooks/use-a11y-attribute/"
+    description="Accesibilidad, gestión de fondos, pantalla completa, lenguaje de señas, atajos de teclado y sesión."
+  />
+  <LinkCard
+    title="Utilidades"
+    icon="config"
+    href="/docu-books/utilities/current-paragraph/"
+    description="Eventos de video, actualización de títulos, control de foco y gestión de navegación."
+  />
+  <LinkCard
+    title="Constantes"
+    icon="list-format"
+    href="/docu-books/const/"
+    description="Definición de eventos globales, teclas de accesibilidad y expresiones regulares estándar."
+  />
+    <LinkCard
+    title="¿Cómo documentar?"
+    icon="config"
+    href="/docu-books/guides/como-documentar/"
+    description="Pasos y plantilla para crear o actualizar páginas de la documentación."
+  />
+</CardGrid>
+
+<style>{`
+
+  .hero{
+    grid-template-columns: 1fr;
+  }
+
+  .hero .tagline {
+    max-width: 48rem;
+    font-size: 1.05rem;
+  }
+
+  /* Cards minimalistas */
+  .card {
+    background: color-mix(in srgb, var(--sl-color-bg) 92%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--sl-color-text) 10%, transparent) !important;
+    border-radius: 0.65rem !important;
+    transition: border-color 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .card:hover {
+    border-color: color-mix(in srgb, var(--sl-color-text) 25%, transparent) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 10px 20px -10px color-mix(in srgb, var(--sl-color-text) 15%, transparent) !important;
+  }
+
+  .card .icon {
+    background-color: color-mix(in srgb, var(--sl-color-text) 8%, transparent) !important;
+    border-radius: 0.5rem !important;
+    padding: 0.35rem !important;
+    color: var(--sl-color-text) !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .card:hover .icon {
+    transform: scale(1.1) rotate(5deg) !important;
+  }
+`}</style>

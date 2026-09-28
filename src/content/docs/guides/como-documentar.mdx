@@ -1,0 +1,58 @@
+---
+title: Como documentar
+description: Pasos y plantilla para crear o actualizar paginas de la documentacion.
+---
+
+## Donde crear una pagina
+
+- Ubica el contenido en `src/content/docs/` dentro de la categoria correcta.
+- La ruta se genera segun la carpeta y el archivo.
+
+## Rutas basadas en archivos
+
+Ejemplo:
+
+- Archivo: `src/content/docs/ui/accordion.mdx`
+- Ruta: `/ui/accordion/` (respeta el base path configurado en el sitio)
+
+## Convenciones
+
+- Usa kebab-case para archivos y carpetas.
+- Mantiene un tema por pagina para que sea facil de encontrar.
+- Escribe titulos claros y descripciones cortas.
+
+## Plantilla base
+
+````mdx
+---
+title: Nombre del componente
+description: Descripcion corta en una linea.
+---
+
+## Que es
+Breve definicion.
+
+## Cuando usarlo
+Contexto y casos de uso.
+
+## Uso
+~~~tsx
+// ejemplo
+~~~
+
+## API / Props
+| Prop | Tipo | Descripcion | Default |
+| --- | --- | --- | --- |
+| ... | ... | ... | ... |
+
+## Accesibilidad
+- Recomendaciones clave.
+
+## Notas
+- Consideraciones y limitaciones.
+````
+
+## Publicar en la navegacion
+
+- Agrega el enlace en la pagina de inicio o en la categoria correspondiente.
+- Si la categoria tiene un indice propio, enlazalo ahi para que el equipo lo encuentre facil.
